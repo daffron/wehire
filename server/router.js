@@ -24,20 +24,20 @@ router.post('/auth', (req, res) => {
     if (err) {
       console.log(err)
     }
-    // db.profileExists(conn, decoded.sub)
-    //   .then((exists) => {
-    //     if (exists.length !== 0) {
-    //       return res.status(200).send({
-    //         firstLogin: false
-    //       })
-    //     }
-      //   db.addUserToProfile(conn, decoded.sub, req.body.user, req.body.email)
-      //     .then((result) => {
-      //       res.status('200').send({
-      //         firstLogin: true
-      //       })
-      //     })
-      // })
+    db.profileExists(conn, decoded.sub)
+      .then((exists) => {
+        if (exists.length !== 0) {
+          return res.status(200).send({
+            firstLogin: false
+          })
+        }
+        db.addUserToProfile(conn, decoded.sub, req.body.user, req.body.email)
+          .then((result) => {
+            res.status('200').send({
+              firstLogin: true
+            })
+          })
+      })
   })
 })
 

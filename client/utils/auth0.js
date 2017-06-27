@@ -6,7 +6,7 @@ export default class AuthService {
   constructor (clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: window.location.origin,
+        redirectUrl: false,
         responseType: 'token'
       },
       languageDictionary: {

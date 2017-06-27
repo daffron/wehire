@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {requestLogin} from '../actions/loginauth0'
+import {requestLogin, login} from '../actions/loginauth0'
 
 class Login extends React.Component {
   constructor (props) {
@@ -26,7 +26,8 @@ function mapDispatchToProps (dispatch) {
   return {
     createLogin: () => {
       return dispatch(requestLogin())
-    }
+    },
+    login: dispatch(login())
   }
 }
 
