@@ -27854,26 +27854,41 @@ var _Logout = __webpack_require__(277);
 
 var _Logout2 = _interopRequireDefault(_Logout);
 
+var _loginauth = __webpack_require__(136);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
+function App(props) {
+  console.log(props);
   return _react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     { history: _reactRouter.BrowserHistory },
     _react2.default.createElement(
       'div',
       { className: 'app' },
-      _react2.default.createElement(_Login2.default, null),
-      _react2.default.createElement(_Logout2.default, null)
+      _react2.default.createElement('img', { src: '/images/logo.png' }),
+      !props.isAuthenticated ? _react2.default.createElement(_Login2.default, null) : _react2.default.createElement(_Logout2.default, null),
+      props.isAuthenticated && _react2.default.createElement(
+        'h1',
+        null,
+        'Welcome Back, ',
+        props.user.name
+      )
     )
   );
-};
+}
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     firstLogin: state.auth.firstLogin,
-    waiting: state.waiting
+    user: state.auth.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getUser: dispatch((0, _loginauth.initProfile)())
   };
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);

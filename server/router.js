@@ -26,6 +26,7 @@ router.post('/auth', (req, res) => {
     }
     db.profileExists(conn, decoded.sub)
       .then((exists) => {
+    console.log(decoded.sub, exists)
         if (exists.length !== 0) {
           return res.status(200).send({
             firstLogin: false
