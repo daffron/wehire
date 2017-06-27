@@ -8,7 +8,8 @@
     "test": "ava -v test/**/*.test.js",
     "eslint": "eslint src test",
     "start": "node server",
-    "postinstall": "webpack"
+    "postinstall": "webpack",
+    "knex": "knex"
   },
   "keywords": [
     "react",
@@ -29,12 +30,14 @@
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
     "express": "^4.15.3",
+    "knex": "^0.13.0",
     "prop-types": "^15.5.10",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "sqlite3": "^3.1.8",
     "superagent": "^2.2.0",
     "webpack": "^2.6.1"
   },
