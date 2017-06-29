@@ -17,7 +17,7 @@ function profileExists (conn, id) {
 
 function checkForEmail (conn, email) {
   return conn('users')
-  .select()
+  .select('email')
   .where('email', email)
 }
 
