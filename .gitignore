@@ -61,4 +61,5 @@ typings/
 *.sqlite3
 
 #bundle files
-bundle.*
+bundle.js
+bundle.js.map
