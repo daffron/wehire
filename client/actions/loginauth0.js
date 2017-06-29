@@ -1,4 +1,4 @@
-import request from '../utils/api'
+import request from '../utils/tokenApi'
 import AuthService from '../utils/auth0'
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -39,7 +39,6 @@ export function login () {
     'wehire.au.auth0.com')
   return dispatch => {
     authService.lock.on('authenticated', authResult => {
-      console.log("here")
       authService.lock.getUserInfo(authResult.accessToken, function (error, user) {
         if (error) {
       // Handle error

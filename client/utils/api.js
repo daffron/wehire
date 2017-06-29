@@ -1,23 +1,15 @@
-import request from 'superagent'
-import AuthService from './auth0'
+import request from './tokenApi'
 
-const baseUrl = '/api/v1'
-
-export default function consume (method = 'get', endpoint, data = {}) {
-  const dataMethod = method.toLowerCase() === 'get' && 'query' || 'send'
-  const token = AuthService.getToken()
-  const headers = {
-    Accept: 'application/json'
+export function checkForExisting (input, cb) {
+  if (input.indexOf('@') > -1) {
+    request('get', `/checkexistingemail/${input}`)
+      .then(response => {
+        cb(response.body.exists)
+      })
+  } else {
+    request('get', `/checkexistingusername/${input}`)
+      .then(response => {
+        cb(response.body.exists)
+      })
   }
-  if (AuthService.loggedIn()) {
-    headers['Authorization'] = `Bearer ${token}`
-  }
-  return request[method](baseUrl + endpoint)
-    .set(headers)[dataMethod](data)
-    .then(res => {
-      return res
-    })
-    .catch(err => {
-      throw err
-    })
 }

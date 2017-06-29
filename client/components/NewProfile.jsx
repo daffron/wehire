@@ -1,21 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {checkForExisting} from '../utils/api'
+
 class NewProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       firstName: this.splitName(props.user.name)[0],
-      lastName: this.splitName(props.user.name)[1]
+      lastName: this.splitName(props.user.name)[1],
+      exists: ''
 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.splitName = this.splitName.bind(this)
+    this.handleOffFocus = this.handleOffFocus.bind(this)
   }
 
   handleSubmit (evt) {
     evt.preventDefault()
+    console.log('user will be submitted here')
   }
 
   splitName (name) {
@@ -28,14 +33,22 @@ class NewProfile extends React.Component {
     })
   }
 
+  handleOffFocus (evt) {
+    const name = evt.target.name
+    this.setState({showExisting: false, exists: false})
+    checkForExisting(evt.target.value, result => {
+      if (result) return this.setState({exists: name})
+    })
+  }
+
   render () {
     return (
       <div id="new-profile">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" onChange={this.handleChange} name="userName" />
+          <input type="text" placeholder="Username" onChange={this.handleChange} onBlur={this.handleOffFocus} name="userName" />
           <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstName" value={this.state.firstName} />
           <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastName" value={this.state.lastName} />
-          <input type="email" placeholder="Email" onChange={this.handleChange} name="email" />
+          <input type="email" placeholder="Email" onChange={this.handleChange} onBlur={this.handleOffFocus} name="email" />
           <input type="tel" placeholder="Mobile" onChange={this.handleChange} name="mobile" />
           <p>Address</p>
           <input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetNumber" />
@@ -47,7 +60,9 @@ class NewProfile extends React.Component {
           <p />
           <input type="text" placeholder="Date of Birth" onChange={this.handleChange} name="dob" />
           <input type="text" placeholder="Profile Picture" onChange={this.handleChange} name="profilePictureUrl" />
+          <button>Sign Up</button>
         </form>
+        {this.state.exists && <h1>{this.state.exists.toLowerCase()} already exists</h1>}
       </div>
     )
   }
@@ -59,8 +74,10 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-
-}
+// function mapDispatchToProps (dispatch) {
+//   return {
+//     checkForExisting: input => dispatch(checkForExisting(input))
+//   }
+// }
 
 export default connect(mapStateToProps)(NewProfile)

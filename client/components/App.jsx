@@ -16,7 +16,7 @@ function App (props)  {
       <img src="/images/logo.png"/>
       {!props.isAuthenticated ? <Login /> : <Logout />}
       {props.isAuthenticated && <h1>Welcome Back, {props.user.name}</h1>}
-      <NewProfile />
+      {props.user.name && <NewProfile />}
     </div>
   </Router>
   )
