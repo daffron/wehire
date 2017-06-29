@@ -7,7 +7,7 @@ export function checkForExisting (input) {
   if (input.indexOf('@') > -1) {
     return dispatch => {
       dispatch(waiting())
-      consume('get', '/checkexistingemail', input)
+      consume('get', `/checkexistingemail/${input}`)
       .then(response => {
         return response
       })
@@ -15,7 +15,7 @@ export function checkForExisting (input) {
   } else {
     return dispatch => {
       dispatch(waiting())
-      consume('get', '/checkexistingusername', input)
+      consume('get', `/checkexistingusername/${input}`)
       .then(response => {
         return response
       })
