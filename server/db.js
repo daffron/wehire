@@ -1,4 +1,3 @@
-const _ = require('lodash')
 
 function addUserToProfile (conn, id, username, email) {
   return conn('users')
@@ -16,7 +15,20 @@ function profileExists (conn, id) {
   .where('auth_id', id)
 }
 
+function checkForEmail (conn, email) {
+  return conn('users')
+  .select()
+  .where('email', email)
+}
+
+function checkForUserName (conn, username) {
+  return conn('users')
+  .select()
+  .where('user_name', username)
+}
 module.exports = {
   addUserToProfile,
-  profileExists
+  profileExists,
+  checkForEmail,
+  checkForUserName
 }

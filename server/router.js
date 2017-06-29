@@ -51,14 +51,14 @@ router.use(
 //Anything under here is protected
 
 router.get('/checkexistingemail/:email', (req, res) => {
-  db.checkForEmail(req.params.email)
+  db.checkForEmail(conn, req.params.email)
   .then(result => {
     res.json(result)
   })
 })
 
 router.get('/checkexistingusername/:username', (req, res) => {
-  db.checkForUserName(req.params.username)
+  db.checkForUserName(conn, req.params.username)
   .then(result => {
     res.json(result)
   })
