@@ -4,9 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {BrowserHistory, Redirect} from 'react-router'
 import {isUserComplete} from '../utils/api'
 
-import Login from './Login'
-import Logout from './Logout'
 import NewProfile from './NewProfile'
+import NavBar from './NavBar'
 
 import {capitalize} from '../utils/functions'
 
@@ -20,7 +19,6 @@ class App extends React.Component {
 
   componentDidMount () {
     isUserComplete(this.props.user.user_id, result => {
-      console.log(result)
       this.setState({
         validUser: result
       })
@@ -31,8 +29,7 @@ class App extends React.Component {
     return (
     <Router history={BrowserHistory}>
       <div className='app'>
-        <img src="/images/logo.png"/>
-        {!this.props.isAuthenticated ? <Login /> : <Logout />}
+        <NavBar />
         {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
         {!this.state.validUser && <NewProfile />}
       </div>
