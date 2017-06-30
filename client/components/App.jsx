@@ -7,16 +7,16 @@ import Login from './Login'
 import Logout from './Logout'
 import NewProfile from './NewProfile'
 
-import {initProfile} from '../actions/loginauth0'
+// import {initProfile} from '../actions/loginauth0'
 
-function App (props)  {
+function App (props) {
   return (
   <Router history={BrowserHistory}>
     <div className='app'>
       <img src="/images/logo.png"/>
       {!props.isAuthenticated ? <Login /> : <Logout />}
       {props.isAuthenticated && <h1>Welcome Back, {props.user.name}</h1>}
-      {props.user.name && <NewProfile />}
+      {props.user && <NewProfile />}
     </div>
   </Router>
   )
@@ -30,9 +30,9 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    getUser: dispatch(initProfile())
-  }
-}
+// function mapDispatchToProps (dispatch) {
+//   return {
+//     getUser: dispatch(initProfile())
+//   }
+// }
 export default connect(mapStateToProps)(App)

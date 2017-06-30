@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../actions/loginauth0'
+import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS} from '../actions/loginauth0'
 import AuthService from '../utils/auth0'
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
   token: null,
   errorMessage: '',
   firstLogin: false,
-  user: AuthService.getUser()
+  user: AuthService.getUser() || null
 }
 
 export default function auth (state = initialState, action) {

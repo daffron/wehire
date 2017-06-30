@@ -7,8 +7,8 @@ class NewProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstName: this.splitName(props.user.name)[0],
-      lastName: this.splitName(props.user.name)[1],
+      firstName: this.splitName(props.user.name)[0] || '',
+      lastName: this.splitName(props.user.name)[1] || '',
       exists: ''
 
     }
@@ -24,9 +24,9 @@ class NewProfile extends React.Component {
   }
 
   splitName (name) {
-    return name.split(' ')
+    if (name) { return name.split(' ') }
+    return ['', '']
   }
-
   handleChange (evt) {
     this.setState({
       [evt.target.name]: evt.target.value
@@ -73,11 +73,5 @@ function mapStateToProps (state) {
     user: state.auth.user
   }
 }
-
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     checkForExisting: input => dispatch(checkForExisting(input))
-//   }
-// }
 
 export default connect(mapStateToProps)(NewProfile)
