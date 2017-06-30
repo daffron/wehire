@@ -54,19 +54,30 @@ router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(conn, req.params.email)
   .then(result => {
     if (result[0]) {
-    return res.json({exists: true})
-    } 
+      return res.json({exists: true})
+    }
     res.json({exists: false})
   })
 })
 
 router.get('/checkexistingusername/:username', (req, res) => {
   db.checkForUserName(conn, req.params.username)
-   .then(result => {
+  .then(result => {
     if (result[0]) {
-    return res.json({exists: true})
-    } 
+      return res.json({exists: true})
+    }
     res.json({exists: false})
+  })
+})
+
+router.put('/newuserdetails', (req, res) => {
+  const user = req.body
+  user.buyer = true
+  user.seller = true
+  user.admin = false
+  db.newUser(conn, user)
+  .then(result => {
+    res.json(result)
   })
 })
 

@@ -2,12 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {BrowserHistory, Redirect} from 'react-router'
+import {isUserComplete} from '../actions/index'
 
 import Login from './Login'
 import Logout from './Logout'
 import NewProfile from './NewProfile'
 
 // import {initProfile} from '../actions/loginauth0'
+import {capitalize} from '../utils/functions'
 
 function App (props) {
   return (
@@ -15,8 +17,8 @@ function App (props) {
     <div className='app'>
       <img src="/images/logo.png"/>
       {!props.isAuthenticated ? <Login /> : <Logout />}
-      {props.isAuthenticated && <h1>Welcome Back, {props.user.name}</h1>}
-      {props.user && <NewProfile />}
+      {props.isAuthenticated && <h1>Welcome Back, {capitalize(props.user.given_name)}</h1>}
+      {!props.completeUser && <NewProfile />}
     </div>
   </Router>
   )
@@ -30,9 +32,9 @@ function mapStateToProps (state) {
   }
 }
 
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     getUser: dispatch(initProfile())
-//   }
-// }
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps (dispatch) {
+  return {
+    completeUser: dispatch(isUserComplete(this.props.user.user_id))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

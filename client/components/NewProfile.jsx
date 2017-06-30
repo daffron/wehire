@@ -2,31 +2,47 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {checkForExisting} from '../utils/api'
+import {capitalize} from '../utils/functions'
+import {newUser} from '../actions/registration'
 
 class NewProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstName: this.splitName(props.user.name)[0] || '',
-      lastName: this.splitName(props.user.name)[1] || '',
+      firstName: capitalize(props.user.given_name),
+      lastName: capitalize(props.user.family_name),
+      email: props.user.email,
+      userId: props.user.user_id,
       exists: ''
 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.splitName = this.splitName.bind(this)
     this.handleOffFocus = this.handleOffFocus.bind(this)
   }
 
   handleSubmit (evt) {
     evt.preventDefault()
-    console.log('user will be submitted here')
+    const state = this.state
+    const newUser = {
+      auth_id: state.userId,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      email: state.email,
+      phone_mobile: state.mobile,
+      address_number: state.streetNumber,
+      address_street: state.street,
+      address_line2: state.line2,
+      address_city: state.city,
+      address_country: state.country,
+      address_postcode: state.postCode,
+      date_of_birth: state.dob,
+      profile_image_url: state.profilePictureUrl,
+      user_name: state.userName
+    }
+    this.props.newUser(newUser)
   }
 
-  splitName (name) {
-    if (name) { return name.split(' ') }
-    return ['', '']
-  }
   handleChange (evt) {
     this.setState({
       [evt.target.name]: evt.target.value
@@ -48,7 +64,7 @@ class NewProfile extends React.Component {
           <input type="text" placeholder="Username" onChange={this.handleChange} onBlur={this.handleOffFocus} name="userName" />
           <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstName" value={this.state.firstName} />
           <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastName" value={this.state.lastName} />
-          <input type="email" placeholder="Email" onChange={this.handleChange} onBlur={this.handleOffFocus} name="email" />
+          <input type="email" placeholder="Email" onChange={this.handleChange} onBlur={this.handleOffFocus} name="email" value={this.state.email}/>
           <input type="tel" placeholder="Mobile" onChange={this.handleChange} name="mobile" />
           <p>Address</p>
           <input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetNumber" />
@@ -74,4 +90,10 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(NewProfile)
+function mapDispatchToProps (dispatch) {
+  return {
+    newUser: user => { dispatch(newUser(user)) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewProfile)

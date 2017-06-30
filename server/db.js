@@ -26,9 +26,17 @@ function checkForUserName (conn, username) {
   .select()
   .where('user_name', username)
 }
+
+function newUser (conn, user) {
+  return conn('users')
+  .where('email', user.email)
+  .update(user)
+}
+
 module.exports = {
   addUserToProfile,
   profileExists,
   checkForEmail,
-  checkForUserName
+  checkForUserName,
+  newUser
 }
