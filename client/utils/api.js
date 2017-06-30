@@ -13,3 +13,10 @@ export function checkForExisting (input, cb) {
       })
   }
 }
+
+export function isUserComplete (userId, cb) {
+  request('get', `/checkcompleteuser/${userId}`)
+  .then(response => {
+    cb(response.body.isComplete)
+  })
+}

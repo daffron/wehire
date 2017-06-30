@@ -48,7 +48,7 @@ router.use(
   }),
   auth.handleError
 )
-//Anything under here is protected
+// Anything under here is protected
 
 router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(conn, req.params.email)
@@ -78,6 +78,16 @@ router.put('/newuserdetails', (req, res) => {
   db.newUser(conn, user)
   .then(result => {
     res.json(result)
+  })
+})
+
+router.get('/checkcompleteuser/:id', (req, res) => {
+  db.profileExists(conn, req.params.id)
+  .then(result => {
+    if (result[0].user_name) {
+      return res.json({isComplete: true})
+    }
+    return res.json({isComplete: false})
   })
 })
 
