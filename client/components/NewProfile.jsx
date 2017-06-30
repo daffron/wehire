@@ -23,6 +23,9 @@ class NewProfile extends React.Component {
 
   handleSubmit (evt) {
     evt.preventDefault()
+    if (this.state.exists) {
+      return // make the submit button unclickable
+    }
     const state = this.state
     const newUser = {
       auth_id: state.userId,
@@ -52,6 +55,9 @@ class NewProfile extends React.Component {
   handleOffFocus (evt) {
     const name = evt.target.name
     this.setState({showExisting: false, exists: false})
+    if (this.props.user.email === evt.target.value) {
+      return
+    }
     checkForExisting(evt.target.value, result => {
       if (result) return this.setState({exists: name})
     })
