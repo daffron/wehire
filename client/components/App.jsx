@@ -31,7 +31,7 @@ class App extends React.Component {
       <div className='app'>
         <NavBar />
         {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
-        {!this.state.validUser && <NewProfile />}
+        {!this.state.validUser && this.props.isAuthenticated && <NewProfile />}
       </div>
     </Router>
     )
