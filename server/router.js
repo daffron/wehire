@@ -24,7 +24,7 @@ router.post('/auth', (req, res) => {
     if (err) {
       console.log(err)
     }
-    db.profileExists(conn, decoded.sub)
+    db.getProfileByUserId(conn, decoded.sub)
       .then((exists) => {
     console.log(decoded.sub, exists)
         if (exists.length !== 0) {
@@ -82,7 +82,7 @@ router.put('/newuserdetails', (req, res) => {
 })
 
 router.get('/checkcompleteuser/:id', (req, res) => {
-  db.profileExists(conn, req.params.id)
+  db.getProfileByUserId(conn, req.params.id)
   .then(result => {
     if (result[0].user_name) {
       return res.json({isComplete: true})
