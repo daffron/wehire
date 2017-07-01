@@ -9,7 +9,7 @@ function addUserToProfile (conn, id, username, email) {
   })
 }
 
-function profileExists (conn, id) {
+function getProfileByUserId (conn, id) {
   return conn('users')
   .select()
   .where('auth_id', id)
@@ -35,7 +35,7 @@ function newUser (conn, user) {
 
 module.exports = {
   addUserToProfile,
-  profileExists,
+  getProfileByUserId,
   checkForEmail,
   checkForUserName,
   newUser
