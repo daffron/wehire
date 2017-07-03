@@ -25,7 +25,7 @@ function getProfileByUserId (authId, cb) {
     db.collection('users').find().toArray((err, results) => {
       if (err) return cb(err)
       if (results.length < 1) return cb('no entries')
-      const userDetails = results.find(user => user.authId === authId)
+      const userDetails = results.find(user => user.auth_id === authId)
       return cb(null, userDetails)
     })
   })

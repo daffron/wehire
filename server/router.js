@@ -20,7 +20,7 @@ router.post('/auth', (req, res) => {
     if (err) return res.json({error: err})
     db.getProfileByUserId(decoded.sub, (err, result) => {
       if (err) res.json({error: err})
-      if (result.length !== 0) {
+      if (result.auth_id) {
         return res.status(200).send({
           firstLogin: false
         })
@@ -29,6 +29,7 @@ router.post('/auth', (req, res) => {
         auth_id: decoded.sub,
         email: req.body.email
       }
+      console.log(user)
       db.addUserToProfile(user, (err, result) => {
         if (err) res.json({error: err})
         res.status('200').send({
