@@ -9,8 +9,8 @@ class NewProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstName: capitalize(props.user.given_name),
-      lastName: capitalize(props.user.family_name),
+      firstName: capitalize(props.user.given_name) || '',
+      lastName: capitalize(props.user.family_name) || '',
       email: props.user.email,
       userId: props.user.user_id,
       exists: ''
@@ -19,6 +19,11 @@ class NewProfile extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleOffFocus = this.handleOffFocus.bind(this)
+  }
+
+  componentDidMount () {
+    console.log(this.props)
+    this.props.isComplete()
   }
 
   handleSubmit (evt) {

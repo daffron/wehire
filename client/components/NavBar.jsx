@@ -7,6 +7,10 @@ import {logout} from '../actions/logout'
 import Search from './Search'
 
 class NavBar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
+  }
 
   render () {
     return (
