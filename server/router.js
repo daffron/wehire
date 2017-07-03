@@ -49,7 +49,6 @@ router.use(
 
 router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(req.params.email, (err, result) => {
-    // console.log(result)
     if (err) return res.json({error: err})
     res.json({exists: result})
   })
@@ -57,7 +56,6 @@ router.get('/checkexistingemail/:email', (req, res) => {
 
 router.get('/checkexistingusername/:username', (req, res) => {
   db.checkForUserName(req.params.username, (err, result) => {
-    console.log("result", result, err)
     if (err) res.json({error: err})
     res.json({exists: result})
   })
@@ -77,7 +75,7 @@ router.put('/newuserdetails', (req, res) => {
 router.get('/checkcompleteuser/:id', (req, res) => {
   db.getProfileByUserId(req.params.id, (err, result) => {
     if (err) return res.json({error: err})
-    if (result == undefined) return res.json({error: "no users"})
+    if (result === undefined) return res.json({error: 'no users'})
     if (result.user_name) {
       return res.json({isComplete: true})
     }

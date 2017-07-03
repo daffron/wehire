@@ -47,22 +47,20 @@ function checkForEmail (email, cb) {
     db.collection('users').find().toArray((err, results) => {
       if (err) return cb(err)
       const matches = results.find(user => user.email === email)
-      if (matches) return true
-      return false
+      if (matches) return cb(null, true)
+      return cb(null, false)
     })
   })
 }
 
 function checkForUserName (username, cb) {
-  console.log("here", username)
   getDatabase((err, db) => {
     if (err) return cb(err)
     db.collection('users').find().toArray((err, results) => {
       if (err) return cb(err)
       const matches = results.find(user => user.user_name === username)
-      console.log(matches)
-      if (matches) return true
-      return false
+      if (matches) return cb(null, true)
+      return cb(null, false)
     })
   })
 }
