@@ -15,9 +15,10 @@ class App extends React.Component {
     this.state = {
       validUser: false || []
     }
+    this.isComplete = this.isComplete.bind(this)
   }
 
-  componentDidMount () {
+  isComplete () {
     isUserComplete(this.props.user.user_id, result => {
       this.setState({
         validUser: result
@@ -31,7 +32,7 @@ class App extends React.Component {
         <div className='app'>
           <NavBar />
           {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
-          {!this.state.validUser && this.props.isAuthenticated && <NewProfile />}
+          {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
         </div>
       </Router>
     )

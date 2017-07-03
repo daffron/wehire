@@ -17,6 +17,7 @@ export function checkForExisting (input, cb) {
 export function isUserComplete (userId, cb) {
   request('get', `/checkcompleteuser/${userId}`)
   .then(response => {
+    console.log(response)
     cb(response.body.isComplete)
   })
 }
