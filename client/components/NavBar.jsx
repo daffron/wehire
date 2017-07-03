@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Navbar, NavItem, MenuItem, NavDropdown, Nav} from 'react-bootstrap'
-
+import {Link} from 'react-router-dom'
 import {requestLogin, login} from '../actions/loginauth0'
 import {logout} from '../actions/logout'
 import Search from './Search'
+import UserDashboard from './UserDashboard'
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class NavBar extends React.Component {
   render () {
     return (
       <Navbar collapseOnSelect>
-    <Navbar.Header>
+        <Navbar.Header>
       <Navbar.Brand>
         <img src="/images/logo.png" />
       </Navbar.Brand>
@@ -35,6 +36,7 @@ class NavBar extends React.Component {
       </Nav>
       <Nav pullRight>
         <Search />
+        <Link to='/mywehire'>My WeHire</Link>
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
         : <NavItem eventKey={2} href="#" onClick={this.props.logoutUser}>Log Out</NavItem>

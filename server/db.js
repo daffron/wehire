@@ -26,10 +26,6 @@ function getProfileByUserId (authId, cb) {
       if (err) return cb(err)
       if (results.length < 1) return cb('no entries')
       const userDetails = results.find(user => user.auth_id === authId)
-<<<<<<< HEAD
-=======
-      console.log(userDetails, "results")
->>>>>>> 38fceea05c86461ebf740b48240f60e2a736dad0
       return cb(null, userDetails)
     })
   })

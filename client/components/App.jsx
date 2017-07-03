@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {BrowserHistory, Redirect} from 'react-router'
 import {isUserComplete} from '../utils/api'
+import UserDashboard from './UserDashboard'
 
 import NewProfile from './NewProfile'
 import NavBar from './NavBar'
@@ -13,7 +14,7 @@ class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      validUser: false || []
+      validUser: false
     }
     this.isComplete = this.isComplete.bind(this)
   }
@@ -31,6 +32,7 @@ class App extends React.Component {
       <Router history={BrowserHistory}>
         <div className='app'>
           <NavBar />
+          <Route path='/mywehire' component={UserDashboard} />
           {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
           {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
         </div>
