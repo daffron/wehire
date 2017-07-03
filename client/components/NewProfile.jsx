@@ -65,24 +65,66 @@ class NewProfile extends React.Component {
 
   render () {
     return (
-      <div id="new-profile">
+      <div id="new-profile" className="container">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" onChange={this.handleChange} onBlur={this.handleOffFocus} name="userName" />
-          <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstName" value={this.state.firstName} />
-          <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastName" value={this.state.lastName} />
-          <input type="email" placeholder="Email" onChange={this.handleChange} onBlur={this.handleOffFocus} name="email" value={this.state.email}/>
-          <input type="tel" placeholder="Mobile" onChange={this.handleChange} name="mobile" />
-          <p>Address</p>
-          <input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetNumber" />
-          <input type="text" placeholder="Street" onChange={this.handleChange} name="street" />
-          <input type="text" placeholder="Line 2" onChange={this.handleChange} name="line2" />
-          <input type="text" placeholder="City" onChange={this.handleChange} name="city" />
-          <input type="text" placeholder="Country" onChange={this.handleChange} name="country" />
-          <input type="text" placeholder="Post Code" onChange={this.handleChange} name="postCode" />
-          <p />
-          <input type="text" placeholder="Date of Birth" onChange={this.handleChange} name="dob" />
-          <input type="text" placeholder="Profile Picture" onChange={this.handleChange} name="profilePictureUrl" />
-          <button>Sign Up</button>
+          <div className="form-group row">
+            <label className="col-xs-3">UserName:</label>
+            <input type="text" placeholder="Username" onChange={this.handleChange} onBlur={this.handleOffFocus} name="userName" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">First Name:</label>
+            <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstName" value={this.state.firstName} />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Last Name:</label>
+            <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastName" value={this.state.lastName} />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Email:</label>
+            <input type="email" placeholder="Email" onChange={this.handleChange} onBlur={this.handleOffFocus} name="email" value={this.state.email}/>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Mobile:</label>
+            <input type="tel" placeholder="Mobile" onChange={this.handleChange} name="mobile" />
+          </div>
+          <div className="form-group row">
+            <p>Address</p>
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Street Number:</label>
+            <input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetNumber" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Street:</label>
+            <input type="text" placeholder="Street" onChange={this.handleChange} name="street" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Suburb:</label>
+            <input type="text" placeholder="Line 2" onChange={this.handleChange} name="line2" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">City:</label>
+            <input type="text" placeholder="City" onChange={this.handleChange} name="city" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Country:</label>
+            <input type="text" placeholder="Country" onChange={this.handleChange} name="country" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Post Code:</label>
+            <input type="text" placeholder="Post Code" onChange={this.handleChange} name="postCode" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Date of Birth:</label>
+            <input type="text" placeholder="Date of Birth" onChange={this.handleChange} name="dob" />
+          </div>
+          <div className="form-group row">
+            <label className="col-xs-3">Profile Picture:</label>
+            <input type="text" placeholder="Profile Picture" onChange={this.handleChange} name="profilePictureUrl" />
+          </div>
+          <div className="form-group row">
+            <button>Sign Up</button>
+          </div>
         </form>
         {this.state.exists && <h1>{this.state.exists.toLowerCase()} already exists</h1>}
       </div>
