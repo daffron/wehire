@@ -4,6 +4,7 @@ import {Navbar, NavItem, MenuItem, NavDropdown, Nav} from 'react-bootstrap'
 
 import {requestLogin, login} from '../actions/loginauth0'
 import {logout} from '../actions/logout'
+import Search from './Search'
 
 class NavBar extends React.Component {
 
@@ -29,6 +30,7 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
+        <Search />
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
         : <NavItem eventKey={2} href="#" onClick={this.props.logoutUser}>Log Out</NavItem>
