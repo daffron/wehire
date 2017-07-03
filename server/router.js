@@ -7,10 +7,6 @@ const auth = require('./lib/auth.js')
 const jwt = require('jsonwebtoken')
 const db = require('./db')
 
-const config = require('./../knexfile')[process.env.NODE_ENV || 'development']
-const conn = require('knex')(config)
-
-
 const router = express.Router()
 
 router.use(bodyParser.json())
@@ -21,24 +17,25 @@ function getSecret (req, payload, done) {
 
 router.post('/auth', (req, res) => {
   jwt.verify(req.body.authToken, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      console.log(err)
-    }
-    db.getProfileByUserId(conn, decoded.sub)
-      .then((exists) => {
-    console.log(decoded.sub, exists)
-        if (exists.length !== 0) {
-          return res.status(200).send({
-            firstLogin: false
-          })
-        }
-        db.addUserToProfile(conn, decoded.sub, req.body.user, req.body.email)
-          .then((result) => {
-            res.status('200').send({
-              firstLogin: true
-            })
-          })
+    if (err) return res.json({error: err})
+    db.getProfileByUserId(decoded.sub, (err, result) => {
+      if (err) res.json({error: err})
+      if (result.length !== 0) {
+        return res.status(200).send({
+          firstLogin: false
+        })
+      }
+      const user = {
+        auth_id: decoded.sub,
+        email: req.body.email
+      }
+      db.addUserToProfile(user, (err, result) => {
+        if (err) res.json({error: err})
+        res.status('200').send({
+          firstLogin: true
+        })
       })
+    })
   })
 })
 
@@ -51,22 +48,18 @@ router.use(
 // Anything under here is protected
 
 router.get('/checkexistingemail/:email', (req, res) => {
-  db.checkForEmail(conn, req.params.email)
-  .then(result => {
-    if (result[0]) {
-      return res.json({exists: true})
-    }
-    res.json({exists: false})
+  db.checkForEmail(req.params.email, (err, result) => {
+    // console.log(result)
+    if (err) return res.json({error: err})
+    res.json({exists: result})
   })
 })
 
 router.get('/checkexistingusername/:username', (req, res) => {
-  db.checkForUserName(conn, req.params.username)
-  .then(result => {
-    if (result[0]) {
-      return res.json({exists: true})
-    }
-    res.json({exists: false})
+  db.checkForUserName(req.params.username, (err, result) => {
+    console.log("result", result, err)
+    if (err) res.json({error: err})
+    res.json({exists: result})
   })
 })
 
@@ -75,16 +68,17 @@ router.put('/newuserdetails', (req, res) => {
   user.buyer = true
   user.seller = true
   user.admin = false
-  db.newUser(conn, user)
-  .then(result => {
+  db.newUser(user, (err, result) => {
+    if (err) return res.json({error: err})
     res.json(result)
   })
 })
 
 router.get('/checkcompleteuser/:id', (req, res) => {
-  db.getProfileByUserId(conn, req.params.id)
-  .then(result => {
-    if (result[0].user_name) {
+  db.getProfileByUserId(req.params.id, (err, result) => {
+    if (err) return res.json({error: err})
+    if (result == undefined) return res.json({error: "no users"})
+    if (result.user_name) {
       return res.json({isComplete: true})
     }
     return res.json({isComplete: false})
