@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class UserDashboard extends React.Component {
   constructor (props) {
@@ -8,7 +9,8 @@ class UserDashboard extends React.Component {
   render () {
     return (
       <div>
-        <h1>test</h1>
+        <h3>My WeHire</h3>
+        <Link to='/hire'> Create a listing </Link>
       </div>
     )
   }
