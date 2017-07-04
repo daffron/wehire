@@ -1,4 +1,4 @@
-import {WAITING, NOT_WAITING} from '../actions/index'
+import {WAITING, NOT_WAITING} from '../actions/variables'
 
 const waiting = (state = false, action) => {
   switch (action.type) {

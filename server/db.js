@@ -26,7 +26,6 @@ function getProfileByUserId (authId, cb) {
       if (err) return cb(err)
       if (results.length < 1) return cb('no entries')
       const userDetails = results.find(user => user.auth_id === authId)
-      console.log(userDetails, "results")
       return cb(null, userDetails)
     })
   })
@@ -66,10 +65,31 @@ function checkForUserName (username, cb) {
   })
 }
 
+function getListingsBySearch (term, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').find().toArray((err, results) => {
+      if (err) return cb(err)
+      const matches = []
+      results.map(listing => {
+        if (listing.title.includes(term) || listing.description.includes(term)) {
+          matches.push(listing)
+        }
+      })
+      if (matches.length === 0) {
+        matches.push({error: 'No results'})
+      }
+      return cb(null, matches)
+    })
+  })
+}
+
 module.exports = {
   addUserToProfile,
   getProfileByUserId,
   checkForEmail,
   checkForUserName,
-  newUser
+  newUser,
+  getListingsBySearch
 }
+

@@ -1,5 +1,4 @@
-export const WAITING = 'WAITING'
-export const NOT_WAITING = 'NOT_WAITING'
+import {WAITING, NOT_WAITING} from './variables'
 
 export function waiting () {
   return {
