@@ -38,6 +38,12 @@ router.post('/auth', (req, res) => {
     })
   })
 })
+router.get('/categories', (req, res) => {
+  db.getCategories((err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.get('/listingssearch/:term', (req, res) => {
   db.getListingsBySearch(req.params.term, (err, result) => {
@@ -56,13 +62,6 @@ router.use(
 router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(req.params.email, (err, result) => {
     if (err) return res.json({error: err})
-    res.json({exists: result})
-  })
-})
-
-router.get('/checkexistingusername/:username', (req, res) => {
-  db.checkForUserName(req.params.username, (err, result) => {
-    if (err) res.json({error: err})
     res.json({exists: result})
   })
 })
