@@ -27,8 +27,8 @@ class Search extends React.Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="What are you looking for?.." width="200" onChange={this.handleChange} name="term" required/>
-        <button className="search-btn"><i/></button>
+        <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" required/>
+        <button className="search-btn"><span className="glyphicon glyphicon-search"></span></button>
       </form>
     )
   }
