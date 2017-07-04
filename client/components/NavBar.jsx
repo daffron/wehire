@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Navbar, NavItem, MenuItem, NavDropdown, Nav} from 'react-bootstrap'
-
+import {Link} from 'react-router-dom'
 import {requestLogin, login} from '../actions/loginauth0'
 import {logout} from '../actions/logout'
 import Search from './Search'
+import UserDashboard from './UserDashboard'
 import Waiting from './Waiting'
 
 class NavBar extends React.Component {
@@ -36,6 +37,7 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
+        <Link to='/mywehire'>My WeHire</Link>
         <Search router={this.props} eventKey={4}/>
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
