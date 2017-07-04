@@ -45,6 +45,12 @@ router.get('/categories', (req, res) => {
   })
 })
 
+router.get('/listingssearch/:term', (req, res) => {
+  db.getListingsBySearch(req.params.term, (err, result) => {
+    if (err) return res.json({error: err})
+    return res.json(result)
+  })
+})
 router.use(
   verifyJwt({
     secret: getSecret

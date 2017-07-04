@@ -1,5 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
 import locations from './locations.json'
+import {getCategories} from '../actions/listing'
+
 class CreateListing extends React.Component {
   constructor (props) {
     super(props)
@@ -54,4 +58,16 @@ class CreateListing extends React.Component {
   }
 }
 
-export default CreateListing
+function mapDispatchToProps (dispatch) {
+  return {
+    getCategories: dispatch(getCategories())
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    categories: state.categories
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateListing)
