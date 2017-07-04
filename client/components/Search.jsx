@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {search} from '../actions/search'
+import {Redirect} from 'react-router-dom'
 
 class Search extends React.Component {
   constructor (props) {
@@ -21,11 +22,12 @@ class Search extends React.Component {
   handleSubmit (evt) {
     evt.preventDefault()
     this.props.search(this.state.term)
+    this.props.router.history.push('/search')
   }
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="What are you looking for?.." width="200" onChange={this.handleChange} name="term" />
+        <input type="text" placeholder="What are you looking for?.." width="200" onChange={this.handleChange} name="term" required/>
         <button className="search-btn"><i/></button>
       </form>
     )

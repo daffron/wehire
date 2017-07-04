@@ -5,6 +5,7 @@ import {Navbar, NavItem, MenuItem, NavDropdown, Nav} from 'react-bootstrap'
 import {requestLogin, login} from '../actions/loginauth0'
 import {logout} from '../actions/logout'
 import Search from './Search'
+import Waiting from './Waiting'
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -16,6 +17,7 @@ class NavBar extends React.Component {
     return (
       <Navbar collapseOnSelect>
     <Navbar.Header>
+      {this.props.waiting && <Waiting />}
       <Navbar.Brand>
         <img src="/images/logo.png" />
       </Navbar.Brand>
@@ -34,7 +36,7 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <Search />
+        <Search router={this.props} />
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
         : <NavItem eventKey={2} href="#" onClick={this.props.logoutUser}>Log Out</NavItem>
@@ -48,7 +50,8 @@ class NavBar extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    waiting: state.waiting
   }
 }
 
