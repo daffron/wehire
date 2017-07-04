@@ -30,7 +30,6 @@ router.post('/auth', (req, res) => {
         email: req.body.email
       }
       db.addUserToProfile(user, (err, result) => {
-        console.log('ere')
         if (err) res.json({error: err})
         res.status('200').send({
           firstLogin: true
