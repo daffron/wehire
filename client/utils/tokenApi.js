@@ -17,7 +17,4 @@ export default function consume (method = 'get', endpoint, data = {}) {
     .then(res => {
       return res
     })
-    .catch(err => {
-      throw err
-    })
 }
