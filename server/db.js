@@ -8,6 +8,16 @@ function getDatabase (cb) {
   })
 }
 
+function getCategories (cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('categories').find().toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function newUser (user, cb) {
   user.dateAdded = new Date()
   getDatabase((err, db) => {
@@ -90,6 +100,6 @@ module.exports = {
   checkForEmail,
   checkForUserName,
   newUser,
+  getCategories,
   getListingsBySearch
 }
-

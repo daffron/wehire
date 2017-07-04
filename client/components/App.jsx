@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {BrowserHistory} from 'react-router'
 import {isUserComplete} from '../utils/api'
+import UserDashboard from './UserDashboard'
+import CreateListing from './CreateListing'
 
 import NewProfile from './NewProfile'
 import NavBar from './NavBar'
 import DisplayListings from './DisplayListings'
+import MyProfile from './MyProfile'
 
 import {capitalize} from '../utils/functions'
 
@@ -31,7 +34,10 @@ class App extends React.Component {
     return (
       <Router history={BrowserHistory}>
        <div className='app'>
-          <Route render={routerProps => <NavBar {...routerProps} /> } />
+          <Route render={routerProps => <NavBar {...routerProps} />} />
+            <Route path='/mywehire' component={UserDashboard} />
+            <Route path='/hire' component={CreateListing} />
+            <Route path='/myprofile' component={MyProfile} />
             <div>
               {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
               {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
