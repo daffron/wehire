@@ -18,6 +18,16 @@ function getCategories (cb) {
   })
 }
 
+function getLocations (cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('locations').find().toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function newUser (user, cb) {
   user.dateAdded = new Date()
   getDatabase((err, db) => {
@@ -101,5 +111,6 @@ module.exports = {
   checkForUserName,
   newUser,
   getCategories,
-  getListingsBySearch
+  getListingsBySearch,
+  getLocations
 }

@@ -14,7 +14,6 @@ export function getCategories () {
     dispatch(waiting())
     request('get', '/categories')
     .then(result => {
-      console.log(result.body)
       dispatch(notWaiting())
       dispatch(receiveCategories(result.body))
     })
