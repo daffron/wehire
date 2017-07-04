@@ -17,11 +17,13 @@ class CreateListing extends React.Component {
       images: '',
       despositAmount: 0,
       location: '',
-      categoryId: 1,
+      category: 'Tools',
+      subCategory: '',
       whatsIncludes: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
+    this.handleCategories = this.handleCategories.bind(this)
   }
 
   handleChange (evt) {
@@ -33,7 +35,6 @@ class CreateListing extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
         <h2>Create Listing</h2>
@@ -51,6 +52,26 @@ class CreateListing extends React.Component {
             return (
               <option value={name.regions} key={i}>{name.regions}</option>
             )
+          })}
+        </select>
+        Categories:
+        <select name='category' onChange={this.handleChange}>
+          {this.props.categories.map(type => {
+            return (
+              <option value={type.name} key={type.name}>{type.name}</option>
+            )
+          })}
+        </select>
+         Sub Category:
+        <select name='subCategory' onChange={this.handleChange}>
+          {this.props.categories.filter(type => {
+            return this.state.category === type.name
+          }).map((category) => {
+            return category.sub.map(subcat => {
+              return (
+                <option value={subcat} key={subcat}> {subcat} </option>
+              )
+            })
           })}
         </select>
       </div>

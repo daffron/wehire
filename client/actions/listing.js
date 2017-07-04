@@ -1,4 +1,4 @@
-import {REQUEST_CATEGORIES, RECEIVE_CATEGORIES} from './variables'
+import {RECEIVE_CATEGORIES} from './variables'
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
 
@@ -20,4 +20,3 @@ export function getCategories () {
     })
   }
 }
-
