@@ -70,9 +70,16 @@ function getListingsBySearch (term, cb) {
     if (err) return cb(err)
     db.collection('listings').find().toArray((err, results) => {
       if (err) return cb(err)
-      //const matches = results.filter(listing => Object.values(listing).indexOf(term) > 0)
-      console.log(results)
-      return cb(null, results)
+      const matches = []
+      results.map(listing => {
+        if (listing.title.includes(term) || listing.description.includes(term)) {
+          matches.push(listing)
+        }
+      })
+      if (matches.length === 0) {
+        matches.push({error: 'No results'})
+      }
+      return cb(null, matches)
     })
   })
 }
@@ -85,3 +92,4 @@ module.exports = {
   newUser,
   getListingsBySearch
 }
+

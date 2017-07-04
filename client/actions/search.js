@@ -7,7 +7,7 @@ export function search (term) {
     dispatch(waiting())
     request('get', `/listingssearch/${term}`)
     .then(results => {
-      dispatch(listingResults(results))
+      dispatch(listingResults(results.body))
       dispatch(notWaiting())
     })
   }

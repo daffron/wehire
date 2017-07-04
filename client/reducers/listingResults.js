@@ -1,6 +1,6 @@
 import {LISTING_RESULTS} from '../actions/variables'
 
-const listingResults = (state = false, action) => {
+const listingResults = (state = [], action) => {
   switch (action.type) {
     case LISTING_RESULTS:
       return action.results

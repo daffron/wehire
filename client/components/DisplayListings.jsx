@@ -5,21 +5,24 @@ class DisplayListings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      listingResults: props.listingResults || []
+      
     }
   }
   render () {
     return (
       <div>
-      {this.state.listingResults.map((listing, key) => {
+      {this.props.listingResults.map((listing, key) => {
         return (
-          <div>{listing.title}</div>
+          <div key={key}>
+            <h4>{listing.error}</h4>
+            <strong>{listing.title}</strong>
+            <p>{listing.description}</p>
+          </div>
         )
       })}
       </div>
     )
   }
-
 }
 
 function mapStateToProps (state) {

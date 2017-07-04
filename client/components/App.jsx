@@ -34,7 +34,7 @@ class App extends React.Component {
           <NavBar />
           {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
           {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
-        <DisplayListings />
+        {this.props.listings && <DisplayListings />}
         </div>
       </Router>
     )
@@ -45,7 +45,8 @@ function mapStateToProps (state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     firstLogin: state.auth.firstLogin,
-    user: state.auth.user
+    user: state.auth.user,
+    listings: state.listingResults
   }
 }
 
