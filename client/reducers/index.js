@@ -5,11 +5,15 @@ import waiting from './waiting'
 import categories from './categories'
 import locations from './locations'
 import listingResults from './listingResults'
+import getProfile from './user'
+import error from './error'
 
 export default combineReducers({
   auth,
   waiting,
   listingResults,
   categories,
-  locations
+  locations,
+  getProfile,
+  error
 })
