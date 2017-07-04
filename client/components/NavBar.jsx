@@ -36,7 +36,7 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <NavItem id="search-bar"><Search router={this.props} eventKey={4}/></NavItem>
+        <Search router={this.props} eventKey={4}/>
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
         : <NavItem eventKey={2} href="#" onClick={this.props.logoutUser}>Log Out</NavItem>
