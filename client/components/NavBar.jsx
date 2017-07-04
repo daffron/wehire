@@ -37,7 +37,6 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <Search />
         <Link to='/mywehire'>My WeHire</Link>
         <Search router={this.props} eventKey={4}/>
         {!this.props.isAuthenticated
