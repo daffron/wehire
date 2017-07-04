@@ -1,10 +1,7 @@
 import request from '../utils/tokenApi'
 import AuthService from '../utils/auth0'
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_ERROR = 'LOGIN_ERROR'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+import {LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS} from './variables'
 
 export function requestLogin () {
   const authService = new AuthService('WUpiRitE5dAmEz5SJN0DkyWX2BF61OHh',

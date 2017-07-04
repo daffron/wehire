@@ -1,7 +1,6 @@
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
-
-export const USER_ADDED = 'USER_ADDED'
+import {USER_ADDED} from './variables'
 
 export function newUser (user) {
   return dispatch => {
