@@ -10,4 +10,5 @@ export const WAITING = 'WAITING'
 export const NOT_WAITING = 'NOT_WAITING'
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEOGORIES'
-
+export const GET_PROFILE = 'GET_PROFILE'
+export const ERROR = 'ERROR'

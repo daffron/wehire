@@ -88,4 +88,10 @@ router.get('/checkcompleteuser/:id', (req, res) => {
   })
 })
 
+router.get('/getuserprofile/:id', (req, res) => {
+  db.getProfileByUserId(req.params.id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
 module.exports = router
