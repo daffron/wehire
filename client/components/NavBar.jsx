@@ -39,7 +39,7 @@ class NavBar extends React.Component {
       <Nav pullRight>
         <Search />
         <Link to='/mywehire'>My WeHire</Link>
-        <NavItem id="search-bar"><Search router={this.props} eventKey={4}/></NavItem>
+        <Search router={this.props} eventKey={4}/>
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>
         : <NavItem eventKey={2} href="#" onClick={this.props.logoutUser}>Log Out</NavItem>
