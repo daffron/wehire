@@ -40,6 +40,11 @@ router.post('/auth', (req, res) => {
   })
 })
 
+router.get('/listingssearch/:term', (req, res) => {
+  db.getListingsBySearch(req.params.term, (err, result) => {
+    if (err) return res.json({error: err})
+  })
+})
 router.use(
   verifyJwt({
     secret: getSecret

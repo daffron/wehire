@@ -6,6 +6,7 @@ import {isUserComplete} from '../utils/api'
 
 import NewProfile from './NewProfile'
 import NavBar from './NavBar'
+import DisplayListings from './DisplayListings'
 
 import {capitalize} from '../utils/functions'
 
@@ -28,13 +29,14 @@ class App extends React.Component {
 
   render () {
     return (
-    <Router history={BrowserHistory}>
-      <div className='app'>
-        <NavBar />
-        {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
-        {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
-      </div>
-    </Router>
+      <Router history={BrowserHistory}>
+        <div className='app'>
+          <NavBar />
+          {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
+          {!this.state.validUser && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
+        <DisplayListings />
+        </div>
+      </Router>
     )
   }
 }
