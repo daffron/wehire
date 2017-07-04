@@ -1,4 +1,4 @@
-import {REQUEST_CATEGORIES, RECEIVE_CATEGORIES} from './variables'
+import {RECEIVE_CATEGORIES} from './variables'
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
 
@@ -14,10 +14,8 @@ export function getCategories () {
     dispatch(waiting())
     request('get', '/categories')
     .then(result => {
-      console.log(result.body)
       dispatch(notWaiting())
       dispatch(receiveCategories(result.body))
     })
   }
 }
-

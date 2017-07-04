@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import locations from './locations.json'
 import {getCategories} from '../actions/listing'
+import {getLocations} from '../actions/locations'
 
 class CreateListing extends React.Component {
   constructor (props) {
@@ -16,8 +17,10 @@ class CreateListing extends React.Component {
       unavailableDates: ['15/7/17'],
       images: '',
       despositAmount: 0,
-      location: '',
-      categoryId: 1,
+      region: 'Auckland',
+      suburb: '',
+      category: 'Tools',
+      subCategory: '',
       whatsIncludes: []
     }
     this.handleChange = this.handleChange.bind(this)
@@ -33,7 +36,6 @@ class CreateListing extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
         <h2>Create Listing</h2>
@@ -46,11 +48,43 @@ class CreateListing extends React.Component {
         </select>
         Unavailable Dates:<input name='unavailableDates' onChange={this.handleChange} value={['15/7/17']} /><br />
         Images:<input name='images' onChange={this.handleChange} /><br />
-        Location:<select name='location' onChange={this.handleChange}>
-          {locations.locations.map((name, i) => {
+        Region:<select name='region' onChange={this.handleChange}>
+          {this.props.locations.map((region, i) => {
             return (
-              <option value={name.regions} key={i}>{name.regions}</option>
+              <option value={region.location} key={i}>{region.location}</option>
             )
+          })}
+        </select>
+        Suburb:
+        <select name='suburb' onChange={this.handleChange}>
+          {this.props.locations.filter(region => {
+            return this.state.region === region.location
+          }).map((region) => {
+            return region.sublocation.map(suburb => {
+              return (
+                <option value={suburb} key={suburb}> {suburb} </option>
+              )
+            })
+          })}
+        </select>
+        Categories:
+        <select name='category' onChange={this.handleChange}>
+          {this.props.categories.map(type => {
+            return (
+              <option value={type.name} key={type.name}>{type.name}</option>
+            )
+          })}
+        </select>
+         Sub Category:
+        <select name='subCategory' onChange={this.handleChange}>
+          {this.props.categories.filter(type => {
+            return this.state.category === type.name
+          }).map((category) => {
+            return category.sub.map(subcat => {
+              return (
+                <option value={subcat} key={subcat}> {subcat} </option>
+              )
+            })
           })}
         </select>
       </div>
@@ -60,13 +94,15 @@ class CreateListing extends React.Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getCategories: dispatch(getCategories())
+    getCategories: dispatch(getCategories()),
+    getLocations: dispatch(getLocations())
   }
 }
 
 function mapStateToProps (state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    locations: state.locations
   }
 }
 

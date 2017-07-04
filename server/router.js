@@ -45,6 +45,13 @@ router.get('/categories', (req, res) => {
   })
 })
 
+router.get('/locations', (req, res) => {
+  db.getLocations((err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
 router.get('/listingssearch/:term', (req, res) => {
   db.getListingsBySearch(req.params.term, (err, result) => {
     if (err) return res.json({error: err})
