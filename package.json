@@ -7,7 +7,7 @@
     "dev": "nodemon --watch server & webpack --watch",
     "test": "ava -v test/**/*.test.js",
     "eslint": "eslint src test",
-    "start": "node server"
+    "start": "node server & webpack"
   },
   "keywords": [
     "react",
