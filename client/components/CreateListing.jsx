@@ -47,15 +47,15 @@ class CreateListing extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group row">
             <label className='col-xs-3'>Title:</label>
-            <input type='text' name='title' onChange={this.handleChange} />
+            <input type='text' placeholder='Title' name='title' onChange={this.handleChange} />
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Description:</label>
-            <input type='text' name='description' onChange={this.handleChange} />
+            <input type='text' placeholder='Description'name='description' onChange={this.handleChange} />
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Price:</label>
-            <input name='price' onChange={this.handleChange} />
+            <input type='number' name='price' placeholder='$' onChange={this.handleChange} />
             <select onChange={this.handleSelect}>
               <option value='false'>Per Hour </option>
               <option value='true'> Per Day </option>
@@ -67,7 +67,7 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className="col-xs-3">Images:</label>
-            <input name='images' onChange={this.handleChange} /><br />
+            <input type='url' name='images' onChange={this.handleChange} /><br />
           </div>
           <div className="form-group row">
             <label className="col-xs-3"> Region:</label>
