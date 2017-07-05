@@ -54,11 +54,20 @@ class CreateListing extends React.Component {
             <input type='text' placeholder='Description'name='description' onChange={this.handleChange} />
           </div>
           <div className="form-group row">
-            <label className='col-xs-3'>Price:</label>
+            <label className='col-xs-3'>Hire Price:</label>
             <input type='number' name='price' placeholder='$' onChange={this.handleChange} />
             <select onChange={this.handleSelect}>
               <option value='false'>Per Hour </option>
               <option value='true'> Per Day </option>
+            </select>
+          </div>
+          <div className="form-group row">
+            <label className='col-xs-3'>Deposit Price:</label>
+            <select name='despositAmount' onChange={this.handleChange}>
+              <option value={this.state.price * 2}>2x ${this.state.price * 2} </option>
+              <option value={this.state.price * 3}>3x ${this.state.price * 3} </option>
+              <option value={this.state.price * 4}>4x ${this.state.price * 4} </option>
+              <option value={this.state.price * 5}>5x ${this.state.price * 5} </option>
             </select>
           </div>
           <div className="form-group row">
