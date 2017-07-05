@@ -9,7 +9,6 @@
     "eslint": "eslint src test",
     "start": "node server",
     "postinstall": "webpack"
-
   },
   "keywords": [
     "react",
@@ -69,6 +68,7 @@
     "nock": "^9.0.13",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-livereload-plugin": "^0.11.0"
   }
 }
