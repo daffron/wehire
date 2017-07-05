@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 class DisplayListings extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      
+    this.state = { 
     }
   }
   render () {
