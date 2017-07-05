@@ -51,6 +51,13 @@ router.get('/locations', (req, res) => {
     res.json(result)
   })
 })
+router.post('/newlisting', (req, res) => {
+  const listing = req.body
+  db.newListing(listing, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.get('/listingssearch/:term', (req, res) => {
   db.getListingsBySearch(req.params.term, (err, result) => {
@@ -72,6 +79,7 @@ router.get('/checkexistingemail/:email', (req, res) => {
     res.json({exists: result})
   })
 })
+
 
 router.put('/newuserdetails', (req, res) => {
   const user = req.body

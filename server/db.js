@@ -28,6 +28,16 @@ function getLocations (cb) {
   })
 }
 
+function newListing (listing, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').save(listing, (err, result) => {
+      if (err) return cb(err)
+      cb(null, result.ops[0])
+    })
+  })
+}
+
 function newUser (user, cb) {
   user.dateAdded = new Date()
   getDatabase((err, db) => {
@@ -112,5 +122,6 @@ module.exports = {
   newUser,
   getCategories,
   getListingsBySearch,
-  getLocations
+  getLocations,
+  newListing
 }
