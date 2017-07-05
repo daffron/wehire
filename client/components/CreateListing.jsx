@@ -20,7 +20,7 @@ class CreateListing extends React.Component {
       suburb: '',
       category: 'Tools',
       subCategory: '',
-      whatsIncludes: []
+      whatsIncluded: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
@@ -52,6 +52,10 @@ class CreateListing extends React.Component {
           <div className="form-group row">
             <label className='col-xs-3'>Description:</label>
             <input type='text' placeholder='Description'name='description' onChange={this.handleChange} />
+          </div>
+          <div className="form-group row">
+            <label className='col-xs-3'>Whats Included:</label>
+            <input type='text' placeholder='Whats Included'name='whatsIncluded' onChange={this.handleChange} />
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Hire Price:</label>
