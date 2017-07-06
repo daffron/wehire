@@ -4,9 +4,10 @@ const localStorage = global.window.localStorage
 
 export default class AuthService {
   constructor (clientId, domain) {
+    console.log(global.window)
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: false,
+        redirectUrl: 'http://localhost:3000',
         responseType: 'token'
       },
       languageDictionary: {

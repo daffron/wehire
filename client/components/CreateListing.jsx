@@ -4,6 +4,7 @@ import Dropzone from 'react-dropzone'
 import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
 import {uploadImage} from '../utils/tokenApi'
+import {getDepositValue} from '../utils/functions'
 
 class CreateListing extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class CreateListing extends React.Component {
       perHour: true,
       perDay: false,
       unavailableDates: ['15/7/17'],
-      images: null,
+      images: [],
       despositAmount: 0,
       region: 'Auckland',
       suburb: '',
@@ -44,21 +45,18 @@ class CreateListing extends React.Component {
     this.props.createListing(this.state)
   }
 
-  handleImageDrop (files) {
-    if (files.length <= 3) {
-      this.setState({images: files})
-      files.map(file => {
-        uploadImage(file, (err, res) => {
-          if (err) return err.message
-          this.setState({
-            displayUpload: false,
-            imageUploading: false
-          })
-        })
+  handleImageDrop (file) {
+    uploadImage(file[0], (err, res) => {
+      if (err) return err.message
+      this.setState({
+        imageUploading: false
       })
-    } else if (files.length > 3) {
-      return console.error('error') // will be replaced when we build front end error handling
-    }
+      const imagesArr = this.state.images.concat(res)
+      this.setState({images: imagesArr})
+      if (this.state.images.length === 3) {
+        this.setState({displayUpload: false})
+      }
+    })
   }
 
   render () {
@@ -89,10 +87,7 @@ class CreateListing extends React.Component {
           <div className="form-group row">
             <label className='col-xs-3'>Deposit Price:</label>
             <select name='despositAmount' onChange={this.handleChange}>
-              <option value={this.state.price * 2}>2x ${this.state.price * 2} </option>
-              <option value={this.state.price * 3}>3x ${this.state.price * 3} </option>
-              <option value={this.state.price * 4}>4x ${this.state.price * 4} </option>
-              <option value={this.state.price * 5}>5x ${this.state.price * 5} </option>
+             {getDepositValue(this.state.price, this.state.perHour)}
             </select>
           </div>
           <div className="form-group row">
@@ -101,21 +96,29 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
-          <div className='col-md-6'>
-                 {this.state.displayUpload && <Dropzone
-                    multiple={true}
+          <div className='col-md-6 image-upload'>
+              <div className='image-upload-single'>
+                 {this.state.images[0] ? <img src={this.state.images[0]} className='listing-photo' /> : <Dropzone
                     accept='image/*'
                     onDrop={this.handleImageDrop}>
                     <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
                   </Dropzone>}
-                  {this.state.images &&
-                    <div className='photo-size'>
-                      <h5>Upload Successful</h5>
-                      <img src={this.state.images[0].preview } className='listing-photo'/>
-                      <img src={this.state.images[1].preview } className='listing-photo'/>
-                      <img src={this.state.images[2].preview } className='listing-photo'/>                                                                                
-                    </div>}
                 </div>
+                <div className='image-upload-single'>
+                  {this.state.images[1] ? <img src={this.state.images[1]} className='listing-photo' /> : <Dropzone
+                    accept='image/*'
+                    onDrop={this.handleImageDrop}>
+                    <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
+                  </Dropzone>}
+                </div>
+                <div className='image-upload-single'>
+                  {this.state.images[2] ? <img src={this.state.images[2]} className='listing-photo' /> : <Dropzone
+                    accept='image/*'
+                    onDrop={this.handleImageDrop}>
+                    <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
+                  </Dropzone>}
+                </div>
+              </div>
             </div>
           <div className="form-group row">
             <label className="col-xs-3"> Region:</label>
