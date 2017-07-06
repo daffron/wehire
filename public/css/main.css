@@ -9,3 +9,19 @@
 .photo-size {
   display:inline-block;
 }
+
+.landing-image {
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-upload-single {
+  display: flex;
+  margin: 7px;
+}

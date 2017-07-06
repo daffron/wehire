@@ -10,6 +10,7 @@ import NewProfile from './NewProfile'
 import NavBar from './NavBar'
 import DisplayListings from './DisplayListings'
 import MyProfile from './MyProfile'
+import LandingPage from './LandingPage'
 
 import {capitalize} from '../utils/functions'
 
@@ -35,6 +36,7 @@ class App extends React.Component {
       <Router history={BrowserHistory}>
        <div className='app'>
           <Route render={routerProps => <NavBar {...routerProps} />} />
+            <Route exact path='/' component={LandingPage} />
             <Route path='/mywehire' component={UserDashboard} />
             <Route path='/hire' component={CreateListing} />
             <Route path='/myprofile' component={MyProfile} />

@@ -12,6 +12,14 @@ class NavBar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
+    this.handleMyAccount = this.handleMyAccount.bind(this)
+  }
+
+  handleMyAccount () {
+    if (!this.props.isAuthenticated) {
+      return this.props.createLogin()
+    }
+    this.props.history.push('/mywehire')
   }
 
   render () {
@@ -37,7 +45,7 @@ class NavBar extends React.Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <Link to='/mywehire'>My WeHire</Link>
+        <a onClick={this.handleMyAccount}>My WeHire</a>
         <Search router={this.props} eventKey={4}/>
         {!this.props.isAuthenticated
         ? <NavItem eventKey={2} href="#" onClick={this.props.createLogin}>Log In</NavItem>

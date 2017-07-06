@@ -8,7 +8,6 @@ class UserDashboard extends React.Component {
   }
 
   goToProfile () {
-    this.props.getUser(this.props.initialUser)
     this.props.history.push('/myprofile')
   }
 
@@ -22,6 +21,5 @@ class UserDashboard extends React.Component {
     )
   }
 }
-
 
 export default connect()(UserDashboard)
