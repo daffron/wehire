@@ -9,7 +9,6 @@
     "eslint": "eslint src test",
     "start": "node server",
     "postinstall": "webpack"
-
   },
   "keywords": [
     "react",
@@ -44,6 +43,7 @@
     "react-bootstrap": "^0.31.0",
     "react-bootstrap-navbar": "^1.1.0",
     "react-dom": "^15.3.0",
+    "react-dropzone": "^3.13.3",
     "react-nav-bar": "^0.6.5",
     "react-redux": "^4.4.5",
     "react-router-dom": "^4.1.1",
@@ -69,6 +69,7 @@
     "nock": "^9.0.13",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-livereload-plugin": "^0.11.0"
   }
 }
