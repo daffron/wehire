@@ -113,7 +113,7 @@ class CreateListing extends React.Component {
                       <h5>Upload Successful</h5>
                       <img src={this.state.images[0].preview } className='listing-photo'/>
                       <img src={this.state.images[1].preview } className='listing-photo'/>
-                      <img src={this.state.images[2].preview } className='listing-photo'/>                                                                                
+                      <img src={this.state.images[2].preview } className='listing-photo'/>
                     </div>}
                 </div>
             </div>
