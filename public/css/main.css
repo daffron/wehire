@@ -1,3 +1,11 @@
 .search-bar {
   min-width: 500px;
 }
+.listing-photo {
+  width:200px;
+  height:200px;
+}
+
+.photo-size {
+  display:inline-block;
+}

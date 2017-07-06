@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import Dropzone from 'react-dropzone'
 import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
+import {uploadImage} from '../utils/tokenApi'
 
 class CreateListing extends React.Component {
   constructor (props) {
@@ -14,17 +15,20 @@ class CreateListing extends React.Component {
       perHour: true,
       perDay: false,
       unavailableDates: ['15/7/17'],
-      images: '',
+      images: null,
       despositAmount: 0,
       region: 'Auckland',
       suburb: '',
       category: 'Tools',
       subCategory: '',
-      whatsIncluded: []
+      whatsIncluded: [],
+      displayUpload: true,
+      imageUploading: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleImageDrop = this.handleImageDrop.bind(this)
   }
 
   handleChange (evt) {
@@ -40,6 +44,23 @@ class CreateListing extends React.Component {
     this.props.createListing(this.state)
   }
 
+  handleImageDrop (files) {
+    this.setState({images: files})
+    if(files.length > 3) {
+    files.map(file => {
+      uploadImage(file, (err, res) => {
+        if (err) return err.message
+        this.setState({
+          displayUpload: false,
+          imageUploading: false
+        })
+      })
+    })
+    } else {
+      return console.error('no')
+    }
+    this.setState({imageUploading: true})
+  }
   render () {
     return (
       <div className="container">
@@ -79,9 +100,23 @@ class CreateListing extends React.Component {
             <input name='unavailableDates' onChange={this.handleChange} value={['15/7/17']} /><br />
           </div>
           <div className="form-group row">
-            <label className="col-xs-3">Images:</label>
-            <input type='url' name='images' onChange={this.handleChange} /><br />
-          </div>
+          <label className='col-xs-3'>Upload Images:</label>
+          <div className='col-md-6'>
+                 {this.state.displayUpload && <Dropzone
+                    multiple={true}
+                    accept='image/*'
+                    onDrop={this.handleImageDrop}>
+                    <p>Drop an image or click to select a file to upload.</p>
+                  </Dropzone>}
+                  {this.state.images &&
+                    <div className='photo-size'>
+                      <h5>Upload Successful</h5>
+                      <img src={this.state.images[0].preview } className='listing-photo'/>
+                      <img src={this.state.images[1].preview } className='listing-photo'/>
+                      <img src={this.state.images[2].preview } className='listing-photo'/>                                                                                
+                    </div>}
+                </div>
+            </div>
           <div className="form-group row">
             <label className="col-xs-3"> Region:</label>
             <select name='region' onChange={this.handleChange}>
