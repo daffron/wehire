@@ -57,7 +57,7 @@ class CreateListing extends React.Component {
         })
       })
     } else if (files.length > 3) {
-      return console.error('error')
+      return console.error('error') // will be replaced when we build front end error handling
     }
   }
 
