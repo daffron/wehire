@@ -45,22 +45,22 @@ class CreateListing extends React.Component {
   }
 
   handleImageDrop (files) {
-    this.setState({images: files})
-    if(files.length > 3) {
-    files.map(file => {
-      uploadImage(file, (err, res) => {
-        if (err) return err.message
-        this.setState({
-          displayUpload: false,
-          imageUploading: false
+    if (files.length <= 3) {
+      this.setState({images: files})
+      files.map(file => {
+        uploadImage(file, (err, res) => {
+          if (err) return err.message
+          this.setState({
+            displayUpload: false,
+            imageUploading: false
+          })
         })
       })
-    })
-    } else {
-      return console.error('no')
+    } else if (files.length > 3) {
+      return console.error('error')
     }
-    this.setState({imageUploading: true})
   }
+
   render () {
     return (
       <div className="container">
@@ -106,7 +106,7 @@ class CreateListing extends React.Component {
                     multiple={true}
                     accept='image/*'
                     onDrop={this.handleImageDrop}>
-                    <p>Drop an image or click to select a file to upload.</p>
+                    <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
                   </Dropzone>}
                   {this.state.images &&
                     <div className='photo-size'>
