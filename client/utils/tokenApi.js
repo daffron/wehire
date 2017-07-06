@@ -21,8 +21,7 @@ export default function consume (method = 'get', endpoint, data = {}) {
 
 export function uploadImage (files, callback) {
   request.post('https://api.cloudinary.com/v1_1/dnyp01dqk/upload')
-    .field('upload_preset', 'gam3msqv')
-    .field('multiple', true)
+    .field('upload_preset', process.env.PRESET)
     .field('file', files)
     .end((err, res) => {
       if (err) {

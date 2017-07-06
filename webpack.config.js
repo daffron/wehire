@@ -1,5 +1,7 @@
+require('dotenv').load()
 const path = require('path')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './client/index.js',
@@ -17,7 +19,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new LiveReloadPlugin()
+    new LiveReloadPlugin(),
+    new webpack.EnvironmentPlugin({
+      PRESET: process.env.PRESET,
+      AUTH: process.env.AUTH
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx']
