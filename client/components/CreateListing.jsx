@@ -117,16 +117,6 @@ class CreateListing extends React.Component {
                     onDrop={this.handleImageDrop}>
                     <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
                   </Dropzone>}
-<<<<<<< HEAD
-                  {this.state.images &&
-                    <div className='photo-size'>
-                      <h5>Upload Successful</h5>
-                      <img src={this.state.images[0].preview } className='listing-photo'/>
-                      <img src={this.state.images[1].preview } className='listing-photo'/>
-                      <img src={this.state.images[2].preview } className='listing-photo'/>
-                    </div>}
-=======
->>>>>>> fea08cd985580c5ce075f9242509822d14f2dd99
                 </div>
               </div>
             </div>
