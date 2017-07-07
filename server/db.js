@@ -71,6 +71,16 @@ function addUserToProfile (user, cb) {
   })
 }
 
+function updateProfile (edit, authId, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('users').update({auth_id: authId}, {$set: edit}, (err, result) => {
+      if (err) return cb(err)
+      cb(null, result.ops[0])
+    })
+  })
+}
+
 function checkForEmail (email, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
@@ -123,5 +133,6 @@ module.exports = {
   getCategories,
   getListingsBySearch,
   getLocations,
-  newListing
+  newListing,
+  updateProfile
 }
