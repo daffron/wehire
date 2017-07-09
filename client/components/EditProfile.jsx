@@ -9,20 +9,20 @@ class EditProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstName: capitalize(this.props.profile.first_name) || '',
+      firstName: capitalize(props.profile.first_name) || '',
       lastName: capitalize(props.profile.last_name) || '',
       email: props.user.email,
       userId: props.user.user_id,
       exists: '',
-      mobile: this.props.profile.mobile,
-      streetNumber: this.props.profile.address_number,
-      streetAddress: this.props.profile.address_street,
-      suburb: this.props.profile.address_line2,
-      city: this.props.profile.address_city,
-      country: this.props.profile.address_country,
-      postCode: this.props.profile.postCode,
-      dob: this.props.profile.dob,
-      profilePictureUrl: this.props.profile.profilePictureUrl
+      mobile: props.profile.mobile,
+      streetNumber: props.profile.address_number,
+      streetAddress: props.profile.address_street,
+      suburb: props.profile.address_line2,
+      city: props.profile.address_city,
+      country: props.profile.address_country,
+      postCode: props.profile.address_postcode,
+      dob: props.profile.dob,
+      profilePictureUrl: props.profile.profilePictureUrl
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
