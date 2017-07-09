@@ -76,7 +76,7 @@ function updateProfile (edit, authId, cb) {
     if (err) return cb(err)
     db.collection('users').update({auth_id: authId}, {$set: edit}, (err, result) => {
       if (err) return cb(err)
-      cb(null, result.ops[0])
+      cb(null, result)
     })
   })
 }

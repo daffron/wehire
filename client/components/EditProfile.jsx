@@ -9,8 +9,8 @@ class EditProfile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstName: capitalize(props.user.given_name) || '',
-      lastName: capitalize(props.user.family_name) || '',
+      firstName: capitalize(this.props.profile.first_name) || '',
+      lastName: capitalize(props.profile.last_name) || '',
       email: props.user.email,
       userId: props.user.user_id,
       exists: '',
@@ -23,7 +23,6 @@ class EditProfile extends React.Component {
       postCode: this.props.profile.postCode,
       dob: this.props.profile.dob,
       profilePictureUrl: this.props.profile.profilePictureUrl
-
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -32,11 +31,12 @@ class EditProfile extends React.Component {
 
   handleSubmit (evt) {
     evt.preventDefault()
+    this.props.history.push('/myprofile')
     if (this.state.exists) {
       return // make the submit button unclickable
     }
     const state = this.state
-    const newUser = {
+    const editedUser = {
       auth_id: state.userId,
       first_name: state.firstName,
       last_name: state.lastName,
@@ -52,7 +52,7 @@ class EditProfile extends React.Component {
       profile_image_url: state.profilePictureUrl,
       user_name: state.userName
     }
-    this.props.updateProfile(newUser, this.state.userId)
+    this.props.updateProfile(editedUser, this.state.userId)
   }
 
   handleChange (evt) {
