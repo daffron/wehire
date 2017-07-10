@@ -25,7 +25,6 @@ class Search extends React.Component {
     this.props.router.history.push('/search')
   }
   render () {
-    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" />
