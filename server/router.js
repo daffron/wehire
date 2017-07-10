@@ -80,6 +80,12 @@ router.get('/checkexistingemail/:email', (req, res) => {
   })
 })
 
+router.put('/myprofile/edit', (req, res) => {
+  db.updateProfile(req.body.updated_profile, req.body.user_id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.put('/newuserdetails', (req, res) => {
   const user = req.body

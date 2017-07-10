@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getProfileById} from '../actions/user'
 
 class MyProfile extends React.Component {
@@ -24,7 +25,7 @@ class MyProfile extends React.Component {
         {user.address_country}<br/>
         {user.address_postcode}<br/>
         <br />
-        <button>Edit</button>
+        <Link to='/myprofile/edit'><button>Edit</button></Link>
       </div>
     )
   }
