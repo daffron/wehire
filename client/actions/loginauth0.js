@@ -4,7 +4,7 @@ import AuthService from '../utils/auth0'
 import {LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS} from './variables'
 
 export function requestLogin () {
-  const authService = new AuthService('WUpiRitE5dAmEz5SJN0DkyWX2BF61OHh',
+  const authService = new AuthService(process.env.AUTH,
   'wehire.au.auth0.com')
   authService.login()
   return {

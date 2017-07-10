@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {uploadImage} from '../utils/tokenApi'
 import {checkForExisting} from '../utils/api'
 import {capitalize} from '../utils/functions'
 import {updateProfile} from '../actions/user'

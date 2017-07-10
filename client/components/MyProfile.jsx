@@ -5,7 +5,7 @@ import {getProfileById} from '../actions/user'
 
 class MyProfile extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
     this.state = {}
   }
   componentDidMount () {
