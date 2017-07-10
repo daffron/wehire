@@ -6,7 +6,6 @@ const initialState = {
   isAuthenticated: AuthService.loggedIn(),
   token: null,
   errorMessage: '',
-  firstLogin: false,
   user: AuthService.getUser() || null
 }
 
@@ -20,6 +19,7 @@ export default function auth (state = initialState, action) {
         errorMessage: ''
       }
     case LOGIN_SUCCESS:
+    console.log(action)
       return {
         ...state,
         token: AuthService.getToken(),
