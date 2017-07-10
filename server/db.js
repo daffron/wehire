@@ -71,6 +71,17 @@ function addUserToProfile (user, cb) {
   })
 }
 
+// function addUserToProfile (user, cb) {
+//   console.log(user)
+//   getDatabase((err, db) => {
+//     if (err) return cb(err)
+//     db.collection('users').update({auth_id: user.auth_id}, {$set: user}, (err, result) => {
+//       if (err) return cb(err)
+//       cb(null, result.ops[0])
+//     })
+//   })
+// }
+
 function checkForEmail (email, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)

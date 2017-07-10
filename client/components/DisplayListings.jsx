@@ -8,6 +8,7 @@ class DisplayListings extends React.Component {
     }
   }
   render () {
+
     return (
       <div>
       {this.props.listingResults.map((listing, key) => {
@@ -16,6 +17,7 @@ class DisplayListings extends React.Component {
             <h4>{listing.error}</h4>
             <strong>{listing.title}</strong>
             <p>{listing.description}</p>
+            <img src={listing.images[0]} />
           </div>
         )
       })}

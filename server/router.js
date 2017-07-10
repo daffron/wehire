@@ -20,11 +20,9 @@ router.post('/auth', (req, res) => {
     if (err) return res.json({error: err})
     db.getProfileByUserId(decoded.sub, (err, result) => {
       if (err) res.json({error: err})
-      if (result === undefined) {
-        return res.status(200).send({
-          firstLogin: false
-        })
-      }
+      res.status(200).send({
+        firstLogin: false
+      })
       const user = {
         auth_id: decoded.sub,
         email: req.body.email
