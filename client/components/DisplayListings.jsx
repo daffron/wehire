@@ -8,7 +8,6 @@ class DisplayListings extends React.Component {
     }
   }
   render () {
-
     return (
       <div>
       {this.props.listingResults.map((listing, key) => {

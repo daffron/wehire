@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Navbar, NavItem, MenuItem, NavDropdown, Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+
 import {requestLogin, login} from '../actions/loginauth0'
 import {logout} from '../actions/logout'
 import Search from './Search'
