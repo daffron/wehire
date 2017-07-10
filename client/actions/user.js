@@ -16,6 +16,17 @@ export function getProfileById (id) {
   }
 }
 
+export function updateProfile (edited, id) {
+  return dispatch => {
+    dispatch(waiting())
+    request('put', '/myprofile/edit', {user_id: id, updated_profile: edited})
+    .then(result => {
+      if (result.error) return dispatch(error(result.error))
+      dispatch(notWaiting())
+    })
+  }
+}
+
 function userProfile (profile) {
   return {
     type: GET_PROFILE,

@@ -20,13 +20,11 @@ router.post('/auth', (req, res) => {
     if (err) return res.json({error: err})
     db.getProfileByUserId(decoded.sub, (err, result) => {
       if (err) res.json({error: err})
-      res.status(200).send({
-        firstLogin: false
-      })
       const user = {
         auth_id: decoded.sub,
         email: req.body.email
       }
+      if (result) return res.send({firstLogin: false})
       db.addUserToProfile(user, (err, result) => {
         if (err) res.json({error: err})
         res.status('200').send({
@@ -49,13 +47,6 @@ router.get('/locations', (req, res) => {
     res.json(result)
   })
 })
-router.post('/newlisting', (req, res) => {
-  const listing = req.body
-  db.newListing(listing, (err, result) => {
-    if (err) return res.json({error: err})
-    res.json(result)
-  })
-})
 
 router.get('/listingssearch/:term', (req, res) => {
   db.getListingsBySearch(req.params.term, (err, result) => {
@@ -70,6 +61,13 @@ router.use(
   auth.handleError
 )
 // Anything under here is protected
+router.post('/newlisting', (req, res) => {
+  const listing = req.body
+  db.newListing(listing, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(req.params.email, (err, result) => {
@@ -78,6 +76,12 @@ router.get('/checkexistingemail/:email', (req, res) => {
   })
 })
 
+router.put('/myprofile/edit', (req, res) => {
+  db.updateProfile(req.body.updated_profile, req.body.user_id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.put('/newuserdetails', (req, res) => {
   const user = req.body
