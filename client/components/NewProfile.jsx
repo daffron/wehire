@@ -137,8 +137,8 @@ class NewProfile extends React.Component {
             <label className="col-xs-3">Date of Birth:</label>
             <input type="text" placeholder="Date of Birth" onChange={this.handleChange} name="dob" />
           </div>
-         <div className='image-upload-single'>
-                 {this.state.images ? <img src={this.state.profilePictureUrl[0]} className='listing-photo' /> : <Dropzone
+          <div className='image-upload-single'>
+                  {this.state.profilePictureUrl ? <img src={this.state.profilePictureUrl} className='listing-photo' /> : <Dropzone
                     accept='image/*'
                     onDrop={this.handleImageDrop}>
                     <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
