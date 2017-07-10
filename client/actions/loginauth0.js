@@ -39,7 +39,7 @@ export function login () {
       authService.lock.getUserInfo(authResult.accessToken, function (error, user) {
         if (error) {
       // Handle error
-          dispatch(loginError(error)) 
+          dispatch(loginError(error))
         }
         AuthService.setUser(user)
         AuthService.setToken(authResult.idToken)
