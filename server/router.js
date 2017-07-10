@@ -24,10 +24,10 @@ router.post('/auth', (req, res) => {
         auth_id: decoded.sub,
         email: req.body.email
       }
-      if (result) return res.send({firstLogin: false})
+      if (result) return res.status('200').json({firstLogin: false})
       db.addUserToProfile(user, (err, result) => {
         if (err) res.json({error: err})
-        res.status('200').send({
+        res.status('200').json({
           firstLogin: true
         })
       })
@@ -72,6 +72,13 @@ router.post('/newlisting', (req, res) => {
 router.get('/checkexistingemail/:email', (req, res) => {
   db.checkForEmail(req.params.email, (err, result) => {
     if (err) return res.json({error: err})
+    res.json({exists: result})
+  })
+})
+
+router.get('/checkexistingusername/:username', (req, res) => {
+  db.checkForUserName(req.params.username, (err, result) => {
+    if (err) res.json({error: err})
     res.json({exists: result})
   })
 })

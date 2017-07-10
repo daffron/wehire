@@ -57,7 +57,7 @@ export function initProfile (token, user) {
         dispatch(loginError(response.body.message))
         return Promise.reject(response.body.message)
       } else {
-        dispatch(receiveLogin(user, response.body.firstLogin))
+        return dispatch(receiveLogin(user, response.body.firstLogin))
       }
     })
   }
