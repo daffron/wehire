@@ -32,14 +32,14 @@ export function loginError (err) {
 }
 
 export function login () {
-  const authService = new AuthService('WUpiRitE5dAmEz5SJN0DkyWX2BF61OHh',
+  const authService = new AuthService(process.env.AUTH,
     'wehire.au.auth0.com')
   return dispatch => {
     authService.lock.on('authenticated', authResult => {
       authService.lock.getUserInfo(authResult.accessToken, function (error, user) {
         if (error) {
       // Handle error
-          dispatch(loginError(error))
+          dispatch(loginError(error)) 
         }
         AuthService.setUser(user)
         AuthService.setToken(authResult.idToken)

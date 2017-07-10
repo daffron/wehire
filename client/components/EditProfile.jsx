@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Dropzone from 'react-dropzone'
 
 import {uploadImage} from '../utils/tokenApi'
 import {checkForExisting} from '../utils/api'
@@ -23,11 +24,26 @@ class EditProfile extends React.Component {
       country: props.profile.address_country,
       postCode: props.profile.address_postcode,
       dob: props.profile.dob,
-      profilePictureUrl: props.profile.profilePictureUrl
+      profilePictureUrl: props.profile.profile_image_url,
+      displayUpload: true,
+      imageUploading: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleOffFocus = this.handleOffFocus.bind(this)
+    this.handleImageDrop = this.handleImageDrop.bind(this)
+  }
+
+  handleImageDrop (files) {
+    this.setState({imageUploading: true})
+    uploadImage(files[0], (err, res) => {
+      if (err) return this.props.imageError(err.message)
+      this.setState({
+        profilePictureUrl: res,
+        displayUpload: false,
+        imageUploading: false
+      })
+    })
   }
 
   handleSubmit (evt) {
@@ -128,10 +144,14 @@ class EditProfile extends React.Component {
             <label className="col-xs-3">Date of Birth:</label>
             <input type="text" placeholder="Date of Birth" onChange={this.handleChange} value={this.state.dob} name="dob" />
           </div>
-          <div className="form-group row">
-            <label className="col-xs-3">Profile Picture:</label>
-            <input type="text" placeholder="Profile Picture" onChange={this.handleChange} name="profilePictureUrl" />
-          </div>
+          <div className='image-upload-single'>
+                  <Dropzone
+                    accept='image/*'
+                    onDrop={this.handleImageDrop}>
+                    <p>Drop an image or click to select a file to upload. Max you can upload is 3!</p>
+                  </Dropzone>
+                  <img src={this.state.profilePictureUrl} className='listing-photo' />
+                </div>
           <div className="form-group row">
             <button>Update</button>
           </div>

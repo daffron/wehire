@@ -24,6 +24,7 @@ class MyProfile extends React.Component {
         {user.address_city}<br/>
         {user.address_country}<br/>
         {user.address_postcode}<br/>
+        <img src={user.profile_image_url} className='listing-photo' />
         <br />
         <Link to='/myprofile/edit'><button>Edit</button></Link>
       </div>
