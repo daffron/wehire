@@ -25,12 +25,26 @@ class Search extends React.Component {
     this.props.router.history.push('/search')
   }
   render () {
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" required/>
+        <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" />
+            <label >Categories:</label>
+            <select name='term' onChange={this.handleChange}>
+              {this.props.categories.map(type => {
+                return (
+                  <option value={type.name} key={type.name}>{type.name}</option>
+                )
+              })}
+            </select>
         <button className="search-btn"><span className="glyphicon glyphicon-search"></span></button>
       </form>
     )
+  }
+}
+function mapStateToProps (state) {
+  return {
+    categories: state.categories
   }
 }
 
@@ -39,4 +53,4 @@ function mapDispatchToProps (dispatch) {
     search: searchTerm => { dispatch(search(searchTerm)) }
   }
 }
-export default connect(null, mapDispatchToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
