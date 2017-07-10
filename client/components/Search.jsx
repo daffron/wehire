@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {search} from '../actions/search'
 import {Redirect} from 'react-router-dom'
+import {getCategories} from '../actions/listing'
 
 class Search extends React.Component {
   constructor (props) {
@@ -49,7 +50,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    search: searchTerm => { dispatch(search(searchTerm)) }
+    search: searchTerm => { dispatch(search(searchTerm)) },
+    getCategories: dispatch(getCategories())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Search)

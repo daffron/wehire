@@ -8,7 +8,6 @@ import {logout} from '../actions/logout'
 import Search from './Search'
 import UserDashboard from './UserDashboard'
 import Waiting from './Waiting'
-import {getCategories} from '../actions/listing'
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -63,8 +62,7 @@ class NavBar extends React.Component {
 function mapStateToProps (state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    waiting: state.waiting,
-    categories: state.categories
+    waiting: state.waiting
   }
 }
 
@@ -76,9 +74,7 @@ function mapDispatchToProps (dispatch) {
     login: dispatch(login()),
     logoutUser: () => {
       dispatch(logout())
-    },
-    getCategories: dispatch(getCategories())
-
+    }
   }
 }
 
