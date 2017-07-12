@@ -7,6 +7,7 @@ import locations from './locations'
 import listingResults from './listingResults'
 import getProfile from './user'
 import error from './error'
+import listing from './listing'
 
 export default combineReducers({
   auth,
@@ -15,5 +16,6 @@ export default combineReducers({
   categories,
   locations,
   getProfile,
-  error
+  error,
+  listing
 })

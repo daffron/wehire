@@ -124,6 +124,16 @@ function getListingsBySearch (term, cb) {
   })
 }
 
+function getListingById (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').find({_id: ObjectId(id)}).toArray((err, result) => {
+      if (err) return cb(err)
+      return cb(null, result)
+    })
+  })
+}
+
 module.exports = {
   addUserToProfile,
   getProfileByUserId,
@@ -134,5 +144,6 @@ module.exports = {
   getListingsBySearch,
   getLocations,
   newListing,
-  updateProfile
+  updateProfile,
+  getListingById
 }

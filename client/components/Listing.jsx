@@ -1,11 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {getListing} from '../actions/listing'
+
 class Listing extends React.Component {
   constructor (props) {
-    console.log(props)
     super(props)
-    this.state = {}
+    this.state = {
+      listingId: props.match.params.id
+    }
+  }
+
+  componentDidMount () {
+    this.props.getListing(this.state.listingId)
   }
 
   render () {
@@ -13,7 +20,7 @@ class Listing extends React.Component {
       <div className='listing'>
         <div className='row'>
           <div className='col-sm-8'>
-            <img src={this.props.lisiting.image[0]} />
+            {this.props.listing.images && <img src={this.props.listing.images[0]} />}
           </div>
         </div>
       </div>
@@ -21,10 +28,16 @@ class Listing extends React.Component {
   }
 }
 
-// function mapStateToProps (state) {
-//   return {
-//     listing
-//   }
-// }
+function mapStateToProps (state) {
+  return {
+    listing: state.listing || {}
+  }
+}
 
-export default connect()(Listing)
+function mapDispatchToProps (dispatch) {
+  return {
+    getListing: id => dispatch(getListing(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listing)

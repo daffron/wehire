@@ -1,4 +1,4 @@
-import {RECEIVE_CATEGORIES, NEW_LISTING} from './variables'
+import {RECEIVE_CATEGORIES, NEW_LISTING, LISTING} from './variables'
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
 
@@ -35,5 +35,23 @@ export function createListing (listing) {
       dispatch(newListing(result))
       dispatch(notWaiting())
     })
+  }
+}
+
+export function getListing (id) {
+  return dispatch => {
+    dispatch(waiting())
+    request('get', `/getlisting/${id}`)
+    .then(result => {
+      dispatch(listing(result.body[0]))
+      dispatch(notWaiting())
+    })
+  }
+}
+
+function listing (result) {
+  return {
+    type: LISTING,
+    result
   }
 }
