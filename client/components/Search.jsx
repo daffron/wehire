@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {search} from '../actions/search'
 import {Redirect} from 'react-router-dom'
+import {getCategories} from '../actions/listing'
 
 class Search extends React.Component {
   constructor (props) {
@@ -27,16 +28,30 @@ class Search extends React.Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" required/>
+        <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" />
+            <label >Categories:</label>
+            <select name='term' onChange={this.handleChange}>
+              {this.props.categories.map(type => {
+                return (
+                  <option value={type.name} key={type.name}>{type.name}</option>
+                )
+              })}
+            </select>
         <button className="search-btn"><span className="glyphicon glyphicon-search"></span></button>
       </form>
     )
   }
 }
+function mapStateToProps (state) {
+  return {
+    categories: state.categories
+  }
+}
 
 function mapDispatchToProps (dispatch) {
   return {
-    search: searchTerm => { dispatch(search(searchTerm)) }
+    search: searchTerm => { dispatch(search(searchTerm)) },
+    getCategories: dispatch(getCategories())
   }
 }
-export default connect(null, mapDispatchToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

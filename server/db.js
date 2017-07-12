@@ -112,7 +112,7 @@ function getListingsBySearch (term, cb) {
       if (err) return cb(err)
       const matches = []
       results.map(listing => {
-        if (listing.title.includes(term) || listing.description.includes(term)) {
+        if (listing.title.includes(term) || listing.description.includes(term) || listing.category.includes(term)) {
           matches.push(listing)
         }
       })

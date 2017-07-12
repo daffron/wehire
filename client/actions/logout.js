@@ -9,7 +9,7 @@ export function logoutSuccess () {
 }
 
 export function logout () {
-  const authService = new AuthService('WUpiRitE5dAmEz5SJN0DkyWX2BF61OHh',
+  const authService = new AuthService(process.env.AUTH,
   'wehire.au.auth0.com')
 
   return dispatch => {
