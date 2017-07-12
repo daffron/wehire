@@ -45,7 +45,6 @@ class App extends React.Component {
             <Route path='/myprofile/edit' component={EditProfile} />
             <Route path='/listing/:id' component={Listing} />
             <div>
-              {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
               {this.props.firstLogin && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
             </div>
         <Route path='/search' component={DisplayListings} />

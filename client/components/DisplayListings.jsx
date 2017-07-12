@@ -7,14 +7,11 @@ class DisplayListings extends React.Component {
     this.state = {
     }
   }
-<<<<<<< HEAD
 
   goToListing (id) {
     this.props.history.push(`/listing/${id}`)
   }
 
-=======
->>>>>>> 5645b7c77dd2b82dd8aa0769167a958c2432b8c9
   render () {
     return (
       <div>

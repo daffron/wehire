@@ -25,3 +25,7 @@
   display: flex;
   margin: 7px;
 }
+
+.date-wrapper {
+  width: 250px;
+}
