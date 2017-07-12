@@ -12,6 +12,7 @@ import NavBar from './NavBar'
 import DisplayListings from './DisplayListings'
 import MyProfile from './MyProfile'
 import LandingPage from './LandingPage'
+import Listing from './Listing'
 
 import {capitalize} from '../utils/functions'
 
@@ -42,8 +43,8 @@ class App extends React.Component {
             <Route path='/hire' component={CreateListing} />
             <Route path='/myprofile' component={MyProfile} />
             <Route path='/myprofile/edit' component={EditProfile} />
+            <Route path='/listing/:id' component={Listing} />
             <div>
-              {this.props.isAuthenticated && <h1>Welcome Back, {capitalize(this.props.user.given_name)}</h1>}
               {this.props.firstLogin && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
             </div>
         <Route path='/search' component={DisplayListings} />

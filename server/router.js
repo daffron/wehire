@@ -118,4 +118,12 @@ router.get('/getuserprofile/:id', (req, res) => {
     res.json(result)
   })
 })
+
+router.get('/getlisting/:id', (req, res) => {
+  db.getListingById(req.params.id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
+
 module.exports = router

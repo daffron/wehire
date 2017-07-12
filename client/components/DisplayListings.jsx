@@ -7,6 +7,11 @@ class DisplayListings extends React.Component {
     this.state = {
     }
   }
+
+  goToListing (id) {
+    this.props.history.push(`/listing/${id}`)
+  }
+
   render () {
     return (
       <div>
@@ -16,7 +21,7 @@ class DisplayListings extends React.Component {
             <h4>{listing.error}</h4>
             <strong>{listing.title}</strong>
             <p>{listing.description}</p>
-            <img src={listing.images[0]} />
+            <img src={listing.images[0]} onClick={() => this.goToListing(listing._id)}/>
           </div>
         )
       })}
