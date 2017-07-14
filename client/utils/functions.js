@@ -24,3 +24,14 @@ export function getDuration (start, end) {
   const d = moment.duration(ms)
   return Math.floor(d.asHours()) + 1
 }
+
+export function getDateArray (start, end) {
+  const now = moment(start).clone()
+  const dates = []
+
+  while (now.isBefore(moment(end)) || now.isSame(moment(end))) {
+    dates.push(now.format('M/D/YYYY'))
+    now.add('days', 1)
+  }
+  return dates
+}

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import {InputMoment} from 'react-input-moment'
 
-import {getDuration} from '../utils/functions'
+import {getDuration, getDateArray} from '../utils/functions'
 import {getListing} from '../actions/listing'
 
 class Listing extends React.Component {
@@ -13,7 +13,8 @@ class Listing extends React.Component {
       listingId: props.match.params.id,
       image: 0,
       mStart: moment(),
-      mEnd: moment()
+      mEnd: moment(),
+      listing: props.listing
     }
     this.cycleImages = this.cycleImages.bind(this)
     this.handleStartDateChange = this.handleStartDateChange.bind(this)
@@ -53,6 +54,10 @@ class Listing extends React.Component {
         this.setState({image: 0})
     }
   }
+
+  test (state) {
+    window.alert(getDateArray(state.mStart, state.mEnd))
+  }
   render () {
     return (
       <div className='listing'>
@@ -65,24 +70,27 @@ class Listing extends React.Component {
             <p>{this.props.listing.title}</p>
             <p>{this.props.listing.description}</p>
             <h4>Book Now</h4>
-              <div className='date-boxes'>
+              {this.props.listing.unavailableDates && <div className='date-boxes'>
                 <div className='date-wrapper'>
                   <InputMoment
                   moment={this.state.mStart}
                   onChange={this.handleStartDateChange}
+                  taken={this.props.listing.unavailableDates}
                   />
                 </div>
                 <div className='date-wrapper'>
                   <InputMoment
                   moment={this.state.mEnd}
                   onChange={this.handleEndDateChange}
+                  taken={this.props.listing.unavailableDates}
                   />
                 </div>
               </div>
+              }
             <p>Total Hire Cost: ${this.duration()}</p>
             <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
             <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
-            <button onClick={this.duration}>test</button>
+            <button onClick={() => this.test(this.state)}>test</button>
           </div>
         </div>
       </div>
