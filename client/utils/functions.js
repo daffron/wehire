@@ -30,7 +30,7 @@ export function getDateArray (start, end) {
   const dates = []
 
   while (now.isBefore(moment(end)) || now.isSame(moment(end))) {
-    dates.push(now.format('M/D/YYYY'))
+    dates.push(now.format('MM/DD/YYYY'))
     now.add('days', 1)
   }
   return dates
