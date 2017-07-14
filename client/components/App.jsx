@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {BrowserHistory} from 'react-router'
 import {isUserComplete} from '../utils/api'
+
 import UserDashboard from './UserDashboard'
 import CreateListing from './CreateListing'
-
 import NewProfile from './NewProfile'
 import EditProfile from './EditProfile'
 import NavBar from './NavBar'

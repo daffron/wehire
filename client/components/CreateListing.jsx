@@ -5,6 +5,7 @@ import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
 import {uploadImage} from '../utils/tokenApi'
 import {getDepositValue} from '../utils/functions'
+import TakenDates from './TakenDates'
 
 class CreateListing extends React.Component {
   constructor (props) {
@@ -24,7 +25,8 @@ class CreateListing extends React.Component {
       subCategory: '',
       whatsIncluded: [],
       displayUpload: true,
-      imageUploading: false
+      imageUploading: false,
+      modal: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
@@ -110,7 +112,7 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Unavailable Dates:</label>
-            <input name='unavailableDates' onChange={this.handleChange} value={['15/7/17']} /><br />
+            <TakenDates /><br />
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
