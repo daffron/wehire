@@ -34,7 +34,11 @@ class Listing extends React.Component {
   }
 
   duration () {
-    console.log(getDuration(this.state.mStart, this.state.mEnd))
+    const multiplier = Math.abs(Math.floor(getDuration(this.state.mStart, this.state.mEnd) * Number(this.props.listing.price)))
+    if (this.props.listing.perDay) {
+      return multiplier / 24
+    }
+    return multiplier
   }
 
   cycleImages () {
@@ -53,30 +57,31 @@ class Listing extends React.Component {
     return (
       <div className='listing'>
         <div className='row'>
-          <div className='col-sm-8 text-center'>
+          <div className='col-sm-7 text-center'>
             {this.props.listing.images && <img src={this.props.listing.images[this.state.image]} />}
             <button onClick={this.cycleImages}>Next</button>
           </div>
-          <div className='col-sm-4'>
+          <div className='col-sm-5'>
             <p>{this.props.listing.title}</p>
             <p>{this.props.listing.description}</p>
             <h4>Book Now</h4>
-            <form>
-              <p>From To</p>
-              <div className='date-wrapper'>
-                <InputMoment
-                moment={this.state.mStart}
-                onChange={this.handleStartDateChange}
-                />
+              <div className='date-boxes'>
+                <div className='date-wrapper'>
+                  <InputMoment
+                  moment={this.state.mStart}
+                  onChange={this.handleStartDateChange}
+                  />
+                </div>
+                <div className='date-wrapper'>
+                  <InputMoment
+                  moment={this.state.mEnd}
+                  onChange={this.handleEndDateChange}
+                  />
+                </div>
               </div>
-              <div className='date-wrapper'>
-                <InputMoment
-                moment={this.state.mEnd}
-                onChange={this.handleEndDateChange}
-                />
-              </div>
-            </form>
-            <p>Total: ${Math.abs(Math.floor(getDuration(this.state.mStart, this.state.mEnd) * Number(this.props.listing.price)) / 24)}</p>
+            <p>Total Hire Cost: ${this.duration()}</p>
+            <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
+            <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
             <button onClick={this.duration}>test</button>
           </div>
         </div>

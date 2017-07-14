@@ -28,4 +28,11 @@
 
 .date-wrapper {
   width: 250px;
+  display: flex;
+  flex-direction: row;
+  margin: 9px;
+}
+
+.date-boxes {
+  display: flex;
 }
