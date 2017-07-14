@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import {InputMoment} from 'react-input-moment'
 
+import {getProfileById} from '../actions/user'
 import {getDuration} from '../utils/functions'
 import {getListing} from '../actions/listing'
 

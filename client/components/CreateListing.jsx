@@ -57,7 +57,8 @@ class CreateListing extends React.Component {
       suburb: state.suburb,
       category: state.tools,
       sub_category: state.subCategory,
-      whats_included: state.whatsIncluded
+      whats_included: state.whatsIncluded,
+      user_id: this.props.user.user_id
     }
     this.props.createListing(newListing)
   }
@@ -207,7 +208,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     categories: state.categories,
-    locations: state.locations
+    locations: state.locations,
+    user: state.auth.user
   }
 }
 
