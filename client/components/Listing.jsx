@@ -14,12 +14,14 @@ class Listing extends React.Component {
       image: 0,
       mStart: moment(),
       mEnd: moment(),
-      listing: props.listing
+      listing: props.listing,
+      datesBooked: []
     }
     this.cycleImages = this.cycleImages.bind(this)
     this.handleStartDateChange = this.handleStartDateChange.bind(this)
     this.handleEndDateChange = this.handleEndDateChange.bind(this)
     this.duration = this.duration.bind(this)
+    this.setDates = this.setDates.bind(this)
   }
 
   componentDidMount () {
@@ -55,9 +57,12 @@ class Listing extends React.Component {
     }
   }
 
-  test (state) {
-    window.alert(getDateArray(state.mStart, state.mEnd))
+  setDates (state) {
+    this.setState({
+      datesBooked: (getDateArray(state.mStart, state.mEnd))
+    })
   }
+
   render () {
     return (
       <div className='listing'>
@@ -90,7 +95,8 @@ class Listing extends React.Component {
             <p>Total Hire Cost: ${this.duration()}</p>
             <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
             <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
-            <button onClick={() => this.test(this.state)}>test</button>
+            <p>Days booked: {this.state.datesBooked.length || 0}</p>
+            <button onClick={() => this.setDates(this.state)}>test</button>
           </div>
         </div>
       </div>
