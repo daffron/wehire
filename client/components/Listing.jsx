@@ -79,7 +79,9 @@ class Listing extends React.Component {
                   />
                 </div>
               </div>
-            <p>Total: ${this.duration()}</p>
+            <p>Total Hire Cost: ${this.duration()}</p>
+            <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
+            <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
             <button onClick={this.duration}>test</button>
           </div>
         </div>
