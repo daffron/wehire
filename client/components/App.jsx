@@ -40,7 +40,7 @@ class App extends React.Component {
           <Route render={routerProps => <NavBar {...routerProps} />} />
             <Route exact path='/' component={LandingPage} />
             <Route path='/mywehire' component={UserDashboard} />
-            <Route path='/hire' component={CreateListing} />
+            <Route path='/createlisting' component={CreateListing} />
             <Route path='/myprofile' component={MyProfile} />
             <Route path='/myprofile/edit' component={EditProfile} />
             <Route path='/listing/:id' component={Listing} />

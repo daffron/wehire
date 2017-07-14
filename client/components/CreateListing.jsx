@@ -17,7 +17,7 @@ class CreateListing extends React.Component {
       perDay: false,
       unavailableDates: ['15/7/17'],
       images: [],
-      despositAmount: 0,
+      depositAmount: 0,
       region: 'Auckland',
       suburb: '',
       category: 'Tools',
@@ -41,8 +41,26 @@ class CreateListing extends React.Component {
   }
 
   handleSubmit (evt) {
+    this.props.history.push('/mywehire')
     evt.preventDefault()
-    this.props.createListing(this.state)
+    const state = this.state
+    const newListing = {
+      title: state.title,
+      description: state.description,
+      price: state.price,
+      per_hour: state.perHour,
+      per_day: state.perDay,
+      unavailable_dates: state.unavailableDates,
+      images: state.images,
+      deposit_amount: state.depositAmount,
+      region: state.region,
+      suburb: state.suburb,
+      category: state.tools,
+      sub_category: state.subCategory,
+      whats_included: state.whatsIncluded,
+      user_id: this.props.user.user_id
+    }
+    this.props.createListing(newListing)
   }
 
   handleImageDrop (file) {
@@ -190,7 +208,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     categories: state.categories,
-    locations: state.locations
+    locations: state.locations,
+    user: state.auth.user
   }
 }
 

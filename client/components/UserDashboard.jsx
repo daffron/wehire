@@ -15,7 +15,7 @@ class UserDashboard extends React.Component {
     return (
       <div>
         <h3>My WeHire</h3>
-        <Link to='/hire'> Create a listing </Link>
+        <Link to='/createlisting'> Create a listing </Link>
         <button onClick={this.goToProfile.bind(this)}>Profile</button>
       </div>
     )

@@ -129,7 +129,11 @@ function getListingById (id, cb) {
     if (err) return cb(err)
     db.collection('listings').find({_id: ObjectId(id)}).toArray((err, result) => {
       if (err) return cb(err)
-      return cb(null, result)
+      db.collection('users').find({auth_id: result[0].user_id}).toArray((err, res) => {
+        if (err) return cb(err)
+        result[0].user = res
+        return cb(null, result)
+      })
     })
   })
 }
