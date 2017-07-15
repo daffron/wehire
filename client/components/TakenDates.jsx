@@ -30,8 +30,8 @@ class TakenDates extends React.Component {
   }
 
   handleSave (e) {
-    const formatDates = getDateArray(this.state.mStart, this.state.mEnd)
-    this.props.setDates(formatDates)
+    const dateArray = getDateArray(this.state.mStart, this.state.mEnd)
+    this.props.setDates(dateArray)
   }
 
   handleEndDateChange (m) {

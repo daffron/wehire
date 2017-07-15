@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
 import {uploadImage} from '../utils/tokenApi'
-import {getDepositValue, getDateArray} from '../utils/functions'
+import {getDepositValue} from '../utils/functions'
 import TakenDates from './TakenDates'
 
 class CreateListing extends React.Component {
