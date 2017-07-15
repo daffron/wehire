@@ -45,14 +45,24 @@
 .search-results {
   display: flex;
   flex-direction: row;
+  margin: 15px;
 }
 
 .search-result-item {
   display: flex;
-  max-width: 120px;
+  flex-direction: column;
+  align-content: center;
+  width: 20%;
+  height: 200px;
+  border: 1.5px solid #21ABD5;
+  border-radius: 4px;
+  margin: 3px;
 }
 
 .search-image {
-  width: 75px;
-  height: auto;
+  display: flex;
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  cursor: pointer;
 }
