@@ -17,7 +17,7 @@ class TakenDates extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleStartDateChange = this.handleStartDateChange.bind(this)
     this.handleEndDateChange = this.handleEndDateChange.bind(this)
-    this.handleDates = this.handleDates.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
 
   handleOpen (e) {
@@ -27,19 +27,15 @@ class TakenDates extends React.Component {
 
   handleStartDateChange (m) {
     this.setState({mStart: m})
-    let date = m.format('MM/DD/YYYY')
-    this.props.setDates(date)
   }
 
-  handleDates (e) {
-    const takenDates = getDateArray(this.state.mStart, this.state.mEnd)
-    this.setState({unavailableDates: takenDates})
+  handleSave (e) {
+    const formatDates = getDateArray(this.state.mStart, this.state.mEnd)
+    this.props.setDates(formatDates)
   }
 
   handleEndDateChange (m) {
     this.setState({mEnd: m})
-    let date = m.format('MM/DD/YYYY')
-    this.props.setDates(date)
   }
 
   handleChange (date) {
@@ -62,7 +58,7 @@ class TakenDates extends React.Component {
           <InputMoment
             moment={this.state.mStart}
             onChange={this.handleStartDateChange}
-            taken={this.state.unavailableDates}
+            taken={this.props.dates}
           />
           </div>
             <h4 className='text-center'> End </h4>
@@ -70,10 +66,10 @@ class TakenDates extends React.Component {
             <InputMoment
               moment={this.state.mEnd}
               onChange={this.handleEndDateChange}
-              taken={this.state.unavailableDates}
+              taken={this.props.dates}
             />
           </div>
-          <button onClick={this.handleDates}> Save </button>
+          <button onClick={this.handleSave}> Save </button>
             </ModalDialog>
           </ModalContainer>}
       </div>

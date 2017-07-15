@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
 import {uploadImage} from '../utils/tokenApi'
-import {getDepositValue} from '../utils/functions'
+import {getDepositValue, getDateArray} from '../utils/functions'
 import TakenDates from './TakenDates'
 
 class CreateListing extends React.Component {
@@ -43,11 +43,9 @@ class CreateListing extends React.Component {
     this.setState({perHour: false, perDay: true})
   }
 
-  setDates (m) {
-    const takenDates = this.state.unavailableDates.concat(m)
-    this.setState({
-      unavailableDates: takenDates
-    })
+  setDates (dates) {
+    const takenDates = this.state.unavailableDates.concat(dates)
+    this.setState({unavailableDates: takenDates})
   }
 
   handleSubmit (evt) {
@@ -120,7 +118,7 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Unavailable Dates:</label>
-            <TakenDates setDates={this.setDates}/><br />
+            <TakenDates setDates={this.setDates} dates={this.state.unavailableDates}/><br />
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
