@@ -16,7 +16,7 @@ class CreateListing extends React.Component {
       price: 0,
       perHour: true,
       perDay: false,
-      unavailableDates: ['15/7/17'],
+      unavailableDates: [],
       images: [],
       depositAmount: 0,
       region: 'Auckland',
@@ -32,6 +32,7 @@ class CreateListing extends React.Component {
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleImageDrop = this.handleImageDrop.bind(this)
+    this.setDates = this.setDates.bind(this)
   }
 
   handleChange (evt) {
@@ -40,6 +41,13 @@ class CreateListing extends React.Component {
 
   handleSelect (evt) {
     this.setState({perHour: false, perDay: true})
+  }
+
+  setDates (m) {
+    const takenDates = this.state.unavailableDates.concat(m)
+    this.setState({
+      unavailableDates: takenDates
+    })
   }
 
   handleSubmit (evt) {
@@ -57,7 +65,7 @@ class CreateListing extends React.Component {
       deposit_amount: state.depositAmount,
       region: state.region,
       suburb: state.suburb,
-      category: state.tools,
+      category: state.category,
       sub_category: state.subCategory,
       whats_included: state.whatsIncluded,
       user_id: this.props.user.user_id
@@ -80,6 +88,7 @@ class CreateListing extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     return (
       <div className="container">
         <h2>Create Listing</h2>
@@ -106,13 +115,13 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Deposit Price:</label>
-            <select name='despositAmount' onChange={this.handleChange}>
+            <select name='depositAmount' onChange={this.handleChange}>
              {getDepositValue(this.state.price, this.state.perHour)}
             </select>
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Unavailable Dates:</label>
-            <TakenDates /><br />
+            <TakenDates setDates={this.setDates}/><br />
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
