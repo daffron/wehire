@@ -50,8 +50,10 @@
     "react-nav-bar": "^0.6.5",
     "react-redux": "^4.4.5",
     "react-router-dom": "^4.1.1",
+    "react-stripe-checkout": "^2.4.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "stripe": "^4.23.1",
     "superagent": "^2.2.0",
     "webpack": "^2.6.1"
   },

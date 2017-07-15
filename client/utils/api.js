@@ -21,4 +21,11 @@ export function isUserComplete (userId, cb) {
   })
 }
 
-
+export function saveToken (token, cb) {
+  request('post', '/save-stripe-token', token)
+  .then(response => {
+    response.then(data => {
+      cb(data)
+    })
+  })
+}

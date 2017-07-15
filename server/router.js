@@ -6,6 +6,7 @@ const verifyJwt = require('express-jwt')
 const auth = require('./lib/auth.js')
 const jwt = require('jsonwebtoken')
 const db = require('./db')
+const payment = require('./payment')
 
 const router = express.Router()
 
@@ -47,6 +48,7 @@ router.get('/locations', (req, res) => {
     res.json(result)
   })
 })
+
 
 router.get('/listingssearch/:category/:term', (req, res) => {
   db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
@@ -130,5 +132,26 @@ router.get('/getlisting/:id', (req, res) => {
     res.json(result)
   })
 })
+
+router.post('/save-stripe-token', (req, res) => {
+  console.log(req.body)
+})
+
+// router.post("/charge", (req, res) => {
+//   let amount = 500;
+
+//   stripe.customers.create({
+//      email: req.body.stripeEmail,
+//     source: req.body.stripeToken
+//   })
+//   .then(customer =>
+//     stripe.charges.create({
+//       amount,
+//       description: "Sample Charge",
+//          currency: "usd",
+//          customer: customer.id
+//     }))
+//   .then(charge => res.json(charge));
+// }
 
 module.exports = router
