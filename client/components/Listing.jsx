@@ -75,7 +75,7 @@ class Listing extends React.Component {
             <p>{this.props.listing.title}</p>
             <p>{this.props.listing.description}</p>
             <h4>Book Now</h4>
-              {this.props.listing.unavailableDates && <div className='date-boxes'>
+              {this.props.listing && <div className='date-boxes'>
                 <div className='date-wrapper'>
                   <InputMoment
                   moment={this.state.mStart}
@@ -96,7 +96,7 @@ class Listing extends React.Component {
             <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
             <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
             <p>Days booked: {this.state.datesBooked.length || 0}</p>
-            <button onClick={() => this.setDates(this.state)}>test</button>
+            <button onClick={() => this.setDates(this.state)}>Book</button>
           </div>
         </div>
       </div>

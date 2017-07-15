@@ -41,3 +41,18 @@
 .date-boxes {
   display: flex;
 }
+
+.search-results {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-result-item {
+  display: flex;
+  max-width: 120px;
+}
+
+.search-image {
+  width: 75px;
+  height: auto;
+}

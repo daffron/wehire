@@ -14,14 +14,14 @@ class DisplayListings extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className='search-results'>
       {this.props.listingResults.map((listing, key) => {
         return (
-          <div key={key}>
+          <div key={key} className='search-result-item'>
             <h4>{listing.error}</h4>
             <strong>{listing.title}</strong>
             <p>{listing.description}</p>
-            <img src={listing.images[0]} onClick={() => this.goToListing(listing._id)}/>
+            <img className='search-image' src={listing.images[0]} onClick={() => this.goToListing(listing._id)}/>
           </div>
         )
       })}

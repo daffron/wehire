@@ -8,7 +8,8 @@ class Search extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      term: ''
+      term: '',
+      category: 'Tools'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,7 +23,7 @@ class Search extends React.Component {
 
   handleSubmit (evt) {
     evt.preventDefault()
-    this.props.search(this.state.term)
+    this.props.search(this.state.term, this.state.category)
     this.props.router.history.push('/search')
   }
   render () {
@@ -30,7 +31,7 @@ class Search extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="What are you looking for?.." id="search-bar" onChange={this.handleChange} name="term" />
             <label >Categories:</label>
-            <select name='term' onChange={this.handleChange}>
+            <select name='category' onChange={this.handleChange}>
               {this.props.categories.map(type => {
                 return (
                   <option value={type.name} key={type.name}>{type.name}</option>
@@ -50,7 +51,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    search: searchTerm => { dispatch(search(searchTerm)) },
+    search: (searchTerm, searchCategory) => { dispatch(search(searchTerm, searchCategory)) },
     getCategories: dispatch(getCategories())
   }
 }
