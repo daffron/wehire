@@ -5,6 +5,7 @@ import {getCategories, createListing} from '../actions/listing'
 import {getLocations} from '../actions/locations'
 import {uploadImage} from '../utils/tokenApi'
 import {getDepositValue} from '../utils/functions'
+import TakenDates from './TakenDates'
 
 class CreateListing extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class CreateListing extends React.Component {
       price: 0,
       perHour: true,
       perDay: false,
-      unavailableDates: ['15/7/17'],
+      unavailableDates: [],
       images: [],
       depositAmount: 0,
       region: 'Auckland',
@@ -24,12 +25,14 @@ class CreateListing extends React.Component {
       subCategory: '',
       whatsIncluded: [],
       displayUpload: true,
-      imageUploading: false
+      imageUploading: false,
+      modal: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleImageDrop = this.handleImageDrop.bind(this)
+    this.setDates = this.setDates.bind(this)
   }
 
   handleChange (evt) {
@@ -38,6 +41,11 @@ class CreateListing extends React.Component {
 
   handleSelect (evt) {
     this.setState({perHour: false, perDay: true})
+  }
+
+  setDates (dates) {
+    const takenDates = this.state.unavailableDates.concat(dates)
+    this.setState({unavailableDates: takenDates})
   }
 
   handleSubmit (evt) {
@@ -110,7 +118,7 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Unavailable Dates:</label>
-            <input name='unavailableDates' onChange={this.handleChange} value={['15/7/17']} /><br />
+            <TakenDates setDates={this.setDates} takenDates={this.state.unavailableDates}/><br />
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
