@@ -58,7 +58,7 @@ class TakenDates extends React.Component {
           <InputMoment
             moment={this.state.mStart}
             onChange={this.handleStartDateChange}
-            taken={this.props.dates}
+            taken={this.props.takenDates}
           />
           </div>
             <h4 className='text-center'> End </h4>
@@ -66,7 +66,7 @@ class TakenDates extends React.Component {
             <InputMoment
               moment={this.state.mEnd}
               onChange={this.handleEndDateChange}
-              taken={this.props.dates}
+              taken={this.props.takenDates}
             />
           </div>
           <button onClick={this.handleSave}> Save </button>

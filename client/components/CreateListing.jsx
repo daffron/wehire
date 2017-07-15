@@ -118,7 +118,7 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Unavailable Dates:</label>
-            <TakenDates setDates={this.setDates} dates={this.state.unavailableDates}/><br />
+            <TakenDates setDates={this.setDates} takenDates={this.state.unavailableDates}/><br />
           </div>
           <div className="form-group row">
           <label className='col-xs-3'>Upload Images:</label>
