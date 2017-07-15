@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {BrowserHistory} from 'react-router'
+
 import {isUserComplete} from '../utils/api'
 import UserDashboard from './UserDashboard'
 import CreateListing from './CreateListing'
-
 import NewProfile from './NewProfile'
 import EditProfile from './EditProfile'
 import NavBar from './NavBar'
@@ -13,8 +13,6 @@ import DisplayListings from './DisplayListings'
 import MyProfile from './MyProfile'
 import LandingPage from './LandingPage'
 import Listing from './Listing'
-
-import {capitalize} from '../utils/functions'
 
 class App extends React.Component {
   constructor (props) {

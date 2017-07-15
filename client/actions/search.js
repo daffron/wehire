@@ -10,8 +10,8 @@ export function search (term, category) {
     dispatch(waiting())
     request('get', `/listingssearch/${category}/${term}`)
     .then(results => {
-      dispatch(listingResults(results.body))
       dispatch(notWaiting())
+      dispatch(listingResults(results.body))
     })
   }
 }
