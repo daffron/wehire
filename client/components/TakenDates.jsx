@@ -2,6 +2,7 @@ import React from 'react'
 import {ModalContainer, ModalDialog} from 'react-modal-dialog'
 import {InputMoment} from 'react-input-moment'
 import moment from 'moment'
+import {getDateArray} from '../utils/functions'
 
 class TakenDates extends React.Component {
   constructor (props) {
@@ -16,6 +17,7 @@ class TakenDates extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleStartDateChange = this.handleStartDateChange.bind(this)
     this.handleEndDateChange = this.handleEndDateChange.bind(this)
+    this.handleDates = this.handleDates.bind(this)
   }
 
   handleOpen (e) {
@@ -27,6 +29,11 @@ class TakenDates extends React.Component {
     this.setState({mStart: m})
     let date = m.format('MM/DD/YYYY')
     this.props.setDates(date)
+  }
+
+  handleDates (e) {
+    const takenDates = getDateArray(this.state.mStart, this.state.mEnd)
+    this.setState({unavailableDates: takenDates})
   }
 
   handleEndDateChange (m) {
@@ -55,7 +62,7 @@ class TakenDates extends React.Component {
           <InputMoment
             moment={this.state.mStart}
             onChange={this.handleStartDateChange}
-            taken={[]}
+            taken={this.state.unavailableDates}
           />
           </div>
             <div className='date-wrapper'>
@@ -63,10 +70,10 @@ class TakenDates extends React.Component {
           <InputMoment
             moment={this.state.mEnd}
             onChange={this.handleEndDateChange}
-            taken={[]}
+            taken={this.state.unavailableDates}
           />
-          <button onClick={this.handleClose}> Save </button>
           </div>
+          <button onClick={this.handleDates}> Save </button>
             </ModalDialog>
           </ModalContainer>}
       </div>
