@@ -115,7 +115,11 @@ class CreateListing extends React.Component {
           </div>
           <div className="form-group row">
             <label className='col-xs-3'>Deposit Price:</label>
+<<<<<<< HEAD
             <select name='depositAmount' onChange={this.handleChange}>
+=======
+            <select name='depositAmount' onBlur={this.handleChange}>
+>>>>>>> c19ba5f02867ed141727399650efd3a768f9bc37
              {getDepositValue(this.state.price, this.state.perHour)}
             </select>
           </div>

@@ -31,8 +31,38 @@
   display: flex;
   flex-direction: row;
   margin: 9px;
+  padding-bottom: 7px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #1385E5;
 }
 
 .date-boxes {
   display: flex;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+}
+
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 20%;
+  height: 200px;
+  border: 1.5px solid #21ABD5;
+  border-radius: 4px;
+  margin: 3px;
+}
+
+.search-image {
+  display: flex;
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  cursor: pointer;
 }

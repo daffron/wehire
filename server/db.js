@@ -105,17 +105,37 @@ function checkForUserName (username, cb) {
   })
 }
 
-function getListingsBySearch (term, cb) {
+function getListingsBySearch (category, term, cb) {
+  if (term === 'noterm') {
+    term = null
+  }
+  if (category === 'all') {
+    category = null
+  }
   getDatabase((err, db) => {
     if (err) return cb(err)
     db.collection('listings').find().toArray((err, results) => {
       if (err) return cb(err)
       const matches = []
-      results.map(listing => {
-        if (listing.title.includes(term) || listing.description.includes(term) || listing.category.includes(term)) {
-          matches.push(listing)
-        }
-      })
+      if (term && category) {
+        results.map(listing => {
+          if (listing.title.includes(term) || listing.description.includes(term) && listing.category == category) {
+            matches.push(listing)
+          }
+        })
+      } else if (term) {
+        results.map(listing => {
+          if (listing.title.includes(term) || listing.description.includes(term)) {
+            matches.push(listing)
+          }
+        })
+      } else {
+        results.map(listing => {
+          if (listing.category.includes(category)) {
+            matches.push(listing)
+          }
+        })
+      }
       if (matches.length === 0) {
         matches.push({error: 'No results'})
       }
