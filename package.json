@@ -46,7 +46,6 @@
     "react-bootstrap-navbar": "^1.1.0",
     "react-dom": "^15.3.0",
     "react-dropzone": "^3.13.3",
-    "react-input-moment": "git://github.com/daffron/react-input-moment.git",
     "react-modal-dialog": "^4.0.7",
     "react-nav-bar": "^0.6.5",
     "react-redux": "^4.4.5",

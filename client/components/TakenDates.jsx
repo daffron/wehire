@@ -57,21 +57,21 @@ class TakenDates extends React.Component {
       {this.state.modal &&
           <ModalContainer onClose={this.handleClose}>
             <ModalDialog onClose={this.handleClose}>
+          <h4 className='text-center'> Start </h4>
           <div className='date-wrapper'>
-            <h4> Start </h4>
           <InputMoment
             moment={this.state.mStart}
             onChange={this.handleStartDateChange}
             taken={this.state.unavailableDates}
           />
           </div>
+            <h4 className='text-center'> End </h4>
             <div className='date-wrapper'>
-              <h4> End </h4>
-          <InputMoment
-            moment={this.state.mEnd}
-            onChange={this.handleEndDateChange}
-            taken={this.state.unavailableDates}
-          />
+            <InputMoment
+              moment={this.state.mEnd}
+              onChange={this.handleEndDateChange}
+              taken={this.state.unavailableDates}
+            />
           </div>
           <button onClick={this.handleDates}> Save </button>
             </ModalDialog>
