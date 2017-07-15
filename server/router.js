@@ -48,9 +48,14 @@ router.get('/locations', (req, res) => {
   })
 })
 
-router.get('/listingssearch/:term', (req, res) => {
-  db.getListingsBySearch(req.params.term, (err, result) => {
+router.get('/listingssearch/:category/:term', (req, res) => {
+  db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
     if (err) return res.json({error: err})
+    if (result === null) {
+      result = {
+        error: 'No listings found'
+      }
+    }
     return res.json(result)
   })
 })
