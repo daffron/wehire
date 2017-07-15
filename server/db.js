@@ -158,10 +158,10 @@ function getListingById (id, cb) {
   })
 }
 
-function saveBookedDates (id, dates, cb) {
+function saveBookedDates (listingId, userId, takenDates, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('listings').update({_id: ObjectId(id)}, {$set: {unavailable_dates: dates}}, (err, result) => {
+    db.collection('listings').update({_id: ObjectId(listingId)}, {$set: {unavailable_dates: takenDates, booking: {booked_user: userId, booked_dates: takenDates }}}, (err, result) => {
       if (err) return cb(err)
       cb(null, result)
     })
