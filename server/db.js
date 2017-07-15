@@ -158,6 +158,16 @@ function getListingById (id, cb) {
   })
 }
 
+function saveBookedDates (id, dates, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').update({_id: ObjectId(id)}, {$set: {unavailable_dates: dates}}, (err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 module.exports = {
   addUserToProfile,
   getProfileByUserId,
@@ -169,5 +179,6 @@ module.exports = {
   getLocations,
   newListing,
   updateProfile,
-  getListingById
+  getListingById,
+  saveBookedDates
 }

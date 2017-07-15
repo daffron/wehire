@@ -34,6 +34,7 @@ router.post('/auth', (req, res) => {
     })
   })
 })
+
 router.get('/categories', (req, res) => {
   db.getCategories((err, result) => {
     if (err) res.json({error: err})
@@ -90,6 +91,13 @@ router.get('/checkexistingusername/:username', (req, res) => {
 
 router.put('/myprofile/edit', (req, res) => {
   db.updateProfile(req.body.updated_profile, req.body.user_id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
+  })
+})
+
+router.put('/listing/:id/booking', (req, res) => {
+  db.saveBookedDates(req.params.id, req.body.unavailableDates, (err, result) => {
     if (err) return res.json({error: err})
     res.json(result)
   })
