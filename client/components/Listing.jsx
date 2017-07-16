@@ -2,9 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import {InputMoment} from 'react-input-moment'
+import StripeCheckout from 'react-stripe-checkout'
 
 import {getDuration, getDateArray} from '../utils/functions'
 import {getListing} from '../actions/listing'
+import {saveToken} from '../utils/api'
 
 class Listing extends React.Component {
   constructor (props) {
@@ -34,6 +36,12 @@ class Listing extends React.Component {
 
   handleEndDateChange (m) {
     this.setState({mEnd: m})
+  }
+
+  onToken (token) {
+    saveToken(token, response => {
+      console.log(response)
+    })
   }
 
   duration () {
@@ -93,9 +101,14 @@ class Listing extends React.Component {
               </div>
               }
             <p>Total Hire Cost: ${this.duration()}</p>
-            <p>Deposit: ${Number(this.props.listing.despositAmount)}</p>
-            <p>Total: ${Number(this.props.listing.despositAmount) + this.duration()}</p>
+            <p>Deposit: ${Number(this.props.listing.deposit_amount)}</p>
+            <p>Total: ${Number(this.props.listing.deposit_amount) + this.duration()}</p>
             <p>Days booked: {this.state.datesBooked.length || 0}</p>
+              <StripeCheckout
+              token={this.onToken}
+              stripeKey='pk_test_FAaU6Ejp6b9entznne3IpZrO'
+              amount={(Number(this.props.listing.deposit_amount) + this.duration()) * 100}
+              />
             <button onClick={() => this.setDates(this.state)}>Book</button>
           </div>
         </div>
