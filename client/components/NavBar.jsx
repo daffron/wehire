@@ -29,7 +29,7 @@ class NavBar extends React.Component {
     <Navbar.Header>
       {this.props.waiting && <Waiting />}
       <Navbar.Brand>
-        <img src="/images/logo.png" />
+        <img src="/images/logo.png" onClick={() => this.props.history.push('/')}/>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
