@@ -13,7 +13,7 @@ const newBooking = booking => {
 export function addBooking (listingId, userId, unavailableDates, bookedDates) {
   return dispatch => {
     dispatch(waiting())
-    request('put', `/listing/${listingId}/booking`, {unavailable_dates: unavailableDates, booking: {booked_user: userId, booked_dates: bookedDates}})
+    request('post', `/listing/${listingId}/booking`, {unavailable_dates: unavailableDates, booking: {listing_id: listingId, booked_user: userId, booked_dates: bookedDates}})
     .then(result => {
       if (result.error) return dispatch(error(result.error))
       dispatch(notWaiting())
