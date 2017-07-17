@@ -50,7 +50,6 @@ router.get('/locations', (req, res) => {
   })
 })
 
-
 router.get('/listingssearch/:category/:term', (req, res) => {
   db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
     if (err) return res.json({error: err})

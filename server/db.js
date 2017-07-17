@@ -158,16 +158,6 @@ function getListingById (id, cb) {
   })
 }
 
-// function saveBookedDates (listingId, userId, unavailableDates, bookedDates, cb) {
-//   getDatabase((err, db) => {
-//     if (err) return cb(err)
-//     db.collection('bookings').save({_id: ObjectId(listingId)}, {$set: {unavailable_dates: unavailableDates, booking: {booked_user: userId, booked_dates: bookedDates}}}, (err, result) => {
-//       if (err) return cb(err)
-//       cb(null, result)
-//     })
-//   })
-// }
-
 function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
