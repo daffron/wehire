@@ -6,6 +6,7 @@ import StripeCheckout from 'react-stripe-checkout'
 
 import {getDuration, getDateArray} from '../utils/functions'
 import {getListing} from '../actions/listing'
+import {addBooking} from '../actions/booking'
 import {saveToken} from '../utils/api'
 
 class Listing extends React.Component {
@@ -65,10 +66,12 @@ class Listing extends React.Component {
     }
   }
 
-  setDates (state) {
-    this.setState({
-      datesBooked: (getDateArray(state.mStart, state.mEnd))
-    })
+  setDates (dates) {
+    const unavailableDates = this.props.listing.unavailableDates
+    const bookedDates = getDateArray(dates.mStart, dates.mEnd)
+    this.setState({datesBooked: bookedDates})
+    bookedDates.map(date => unavailableDates.push(date))
+    this.props.addBooking(this.state.listingId, this.props.user.sub, unavailableDates, bookedDates)
   }
 
   render () {
@@ -88,14 +91,14 @@ class Listing extends React.Component {
                   <InputMoment
                   moment={this.state.mStart}
                   onChange={this.handleStartDateChange}
-                  taken={this.props.listing.unavailableDates}
+                  taken={this.props.listing.unavailable_dates}
                   />
                 </div>
                 <div className='date-wrapper'>
                   <InputMoment
                   moment={this.state.mEnd}
                   onChange={this.handleEndDateChange}
-                  taken={this.props.listing.unavailableDates}
+                  taken={this.props.listing.unavailable_dates}
                   />
                 </div>
               </div>
@@ -119,13 +122,17 @@ class Listing extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    listing: state.listing || {}
+    listing: state.listing || {},
+    user: state.auth.user
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    getListing: id => dispatch(getListing(id))
+    getListing: id => dispatch(getListing(id)),
+    addBooking: (listingId, userId, unavailableDates, bookedDates) => {
+      dispatch(addBooking(listingId, userId, unavailableDates, bookedDates))
+    }
   }
 }
 
