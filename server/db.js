@@ -158,10 +158,20 @@ function getListingById (id, cb) {
   })
 }
 
-function saveBookedDates (listingId, userId, unavailableDates, bookedDates, cb) {
+function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('listings').update({_id: ObjectId(listingId)}, {$set: {unavailable_dates: unavailableDates, booking: {booked_user: userId, booked_dates: bookedDates}}}, (err, result) => {
+    db.collection('bookings').save(booking, (err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
+function saveUnavailableDates (listingId, unavailableDates, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').update({_id: ObjectId(listingId)}, {$set: {unavailable_dates: unavailableDates}}, (err, result) => {
       if (err) return cb(err)
       cb(null, result)
     })
@@ -180,5 +190,6 @@ module.exports = {
   newListing,
   updateProfile,
   getListingById,
-  saveBookedDates
+  newBooking,
+  saveUnavailableDates
 }
