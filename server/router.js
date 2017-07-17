@@ -99,7 +99,8 @@ router.put('/myprofile/edit', (req, res) => {
 })
 
 router.put('/listing/:id/booking', (req, res) => {
-  db.saveBookedDates(req.params.id, req.body.booking.bookedUser, req.body.unavailableDates, req.body.bookedDates, (err, result) => {
+  console.log(req.body.booking.bookedDates)
+  db.saveBookedDates(req.params.id, req.body.booking.bookedUser, req.body.unavailableDates, req.body.booking.bookedDates, (err, result) => {
     if (err) return res.json({error: err})
     res.json(result)
   })
