@@ -20,7 +20,7 @@ const receiveBookings = bookings => {
 export function getBookings (userId) {
   return dispatch => {
     dispatch(waiting())
-    request('get', '/bookings')
+    request('get', `/bookings/${userId}`)
     .then(result => {
       dispatch(notWaiting())
       dispatch(receiveBookings(result.body))

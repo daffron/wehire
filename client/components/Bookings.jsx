@@ -13,7 +13,6 @@ class Bookings extends React.Component {
 
 
   render () {
-    console.log(this.props.user.sub)
     return (
     <div>
   <h1>Bookings</h1>

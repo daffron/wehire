@@ -50,8 +50,8 @@ router.get('/locations', (req, res) => {
   })
 })
 
-router.get('/bookings', (req, res) => {
-  db.getBookings(req.body.userId, (err, result) => {
+router.get('/bookings/:userid', (req, res) => {
+  db.getBookings(req.params.userid, (err, result) => {
     if (err) res.json({error: err})
     res.json(result)
   })

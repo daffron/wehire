@@ -16,11 +16,17 @@ class UserDashboard extends React.Component {
       <div>
         <h3>My WeHire</h3>
         <Link to='/createlisting'> Create a listing </Link>
-        <Link to='/mywehire/bookings'>View your Bookings </Link>
+        <Link to='/mywehire/bookings/'>View your Bookings </Link>
         <button onClick={this.goToProfile.bind(this)}>Profile</button>
       </div>
     )
   }
 }
 
-export default connect()(UserDashboard)
+function mapStateToProps (state) {
+  return {
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps)(UserDashboard)
