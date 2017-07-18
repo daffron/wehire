@@ -28,10 +28,10 @@ export function getBookings (userId) {
   }
 }
 
-export function addBooking (listingId, userId, unavailableDates, bookedDates) {
+export function addBooking (listingId, booking) {
   return dispatch => {
     dispatch(waiting())
-    request('post', `/listing/${listingId}/booking`, {unavailableDates, booking: {listing_id: listingId, booked_user: userId, booked_dates: bookedDates}})
+    request('post', `/listing/${listingId}/booking`, booking)
     .then(result => {
       if (result.error) return dispatch(error(result.error))
       dispatch(notWaiting())

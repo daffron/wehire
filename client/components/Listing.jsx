@@ -71,7 +71,14 @@ class Listing extends React.Component {
     const bookedDates = getDateArray(dates.mStart, dates.mEnd)
     this.setState({datesBooked: bookedDates})
     bookedDates.map(date => unavailableDates.push(date))
-    this.props.addBooking(this.state.listingId, this.props.user.sub, unavailableDates, bookedDates)
+    this.props.addBooking(this.state.listingId, {unavailableDates,
+      booking: {
+        listing_name: this.props.listing.title,
+        listing_id: this.state.listingId,
+        booked_user: this.props.user.sub,
+        booked_dates: bookedDates
+      }
+    })
   }
 
   render () {
