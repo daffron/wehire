@@ -50,6 +50,13 @@ router.get('/locations', (req, res) => {
   })
 })
 
+router.get('/bookings', (req, res) => {
+  db.getBookings(req.body.userId, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
 router.get('/listingssearch/:category/:term', (req, res) => {
   db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
     if (err) return res.json({error: err})

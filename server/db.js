@@ -158,6 +158,16 @@ function getListingById (id, cb) {
   })
 }
 
+function getBookings (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').find({booked_user: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
@@ -191,5 +201,6 @@ module.exports = {
   updateProfile,
   getListingById,
   newBooking,
-  saveUnavailableDates
+  saveUnavailableDates,
+  getBookings
 }
