@@ -13,6 +13,7 @@ import DisplayListings from './DisplayListings'
 import MyProfile from './MyProfile'
 import LandingPage from './LandingPage'
 import Listing from './Listing'
+import Bookings from './Bookings'
 
 class App extends React.Component {
   constructor (props) {
