@@ -13,15 +13,15 @@ class Bookings extends React.Component {
   render () {
     return (
     <div className='users-bookings'>
-      <h3 className="text-center">My Bookings</h3>
-      <h3>Renting from</h3>
-<table className='booking-table'>
-  <tr>
-    <th>Listing ID</th>
-    <th>Listing Title</th>
-    <th>Date From</th>
-    <th>Date to</th>
-  </tr>
+        <h3 className="text-center">My Bookings</h3>
+        <h3>Renting from</h3>
+      <table className='booking-table'>
+        <tr>
+          <th>Listing ID</th>
+          <th>Listing Title</th>
+          <th>Date From</th>
+          <th>Date to</th>
+        </tr>
   {this.props.rentingfrom.map(booking => {
     return (
       <tbody>
