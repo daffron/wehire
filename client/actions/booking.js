@@ -1,4 +1,4 @@
-import {NEW_BOOKING, RECEIVE_BOOKINGS, RECEIVE_RENTINGTO_BOOKINGS} from './variables'
+import {NEW_BOOKING, RECEIVE_RENTINGFROM_BOOKINGS, RECEIVE_RENTINGTO_BOOKINGS} from './variables'
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
 import {error} from './error'
@@ -10,9 +10,9 @@ const newBooking = booking => {
   }
 }
 
-const receiveBookings = bookings => {
+const receiveRentingFromBookings = bookings => {
   return {
-    type: RECEIVE_BOOKINGS,
+    type: RECEIVE_RENTINGFROM_BOOKINGS,
     bookings
   }
 }
@@ -29,7 +29,7 @@ export function getRentingFromBookings (userId) {
     request('get', `/bookings/${userId}`)
     .then(result => {
       dispatch(notWaiting())
-      dispatch(receiveBookings(result.body))
+      dispatch(receiveRentingFromBookings(result.body))
     })
   }
 }

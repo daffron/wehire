@@ -8,8 +8,8 @@ import listingResults from './listingResults'
 import getProfile from './user'
 import error from './error'
 import listing from './listing'
-import booking from './booking'
-import usersbookings from './usersbookings'
+import rentingFromBookings from './rentingFromBookings'
+import rentingToBookings from './rentingToBookings'
 
 export default combineReducers({
   auth,
@@ -20,6 +20,6 @@ export default combineReducers({
   getProfile,
   error,
   listing,
-  booking,
-  usersbookings
+  rentingFromBookings,
+  rentingToBookings
 })
