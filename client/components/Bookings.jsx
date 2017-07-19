@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
 
 class Bookings extends React.Component {
   constructor (props) {
@@ -14,18 +15,50 @@ class Bookings extends React.Component {
 
   render () {
     return (
-    <div>
+    <div className='users-bookings'>
   <h3 className="text-center">My Bookings</h3>
         <h3>Renting from</h3>
-  {this.props.bookings.map(booking => {
+<table className='booking-table'>
+  <tr>
+        <th>Listing ID</th>
+        <th>Listing Title</th>
+        <th>Date From</th>
+        <th>Date to</th>
+        </tr>
+  {this.props.rentingfrom.map(booking => {
     return (
-      <div>
-      <h4>Title: {booking.listing_name}</h4>
-      <h5>ID:{booking.listing_id}</h5>
-      </div>
+      <tbody>
+          <tr>
+            <td>{booking.listing_id}</td>
+            <td>{booking.listing_name}</td>
+            <td>{booking.booked_dates[0]} </td>
+            <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
+            </tr>
+      </tbody>
     )
   })}
-
+    </table>
+      <h3>Renting To</h3>
+    <table className='booking-table'>
+  <tr>
+        <th>Listing ID</th>
+        <th>Listing Title</th>
+        <th>Date From</th>
+        <th>Date To</th>
+        </tr>
+  {this.props.rentingto.map(booking => {
+    return (
+      <tbody>
+          <tr>
+            <td>{booking.listing_id}</td>
+            <td>{booking.listing_name}</td>
+            <td>{booking.booked_dates[0]} </td>
+            <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
+            </tr>
+      </tbody>
+    )
+  })}
+    </table>
     </div>
     )
   }
@@ -34,8 +67,9 @@ class Bookings extends React.Component {
 function mapStateToProps (state) {
   return {
     user: state.auth.user,
-    bookings: state.booking,
-    listings: state.listing || {}
+    rentingfrom: state.booking,
+    listings: state.listing || {},
+    rentingto: state.usersbookings
   }
 }
 
