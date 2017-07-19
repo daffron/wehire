@@ -13,7 +13,6 @@ import DisplayListings from './DisplayListings'
 import MyProfile from './MyProfile'
 import LandingPage from './LandingPage'
 import Listing from './Listing'
-import Bookings from './Bookings'
 
 class App extends React.Component {
   constructor (props) {
@@ -43,7 +42,6 @@ class App extends React.Component {
             <Route path='/myprofile' component={MyProfile} />
             <Route path='/myprofile/edit' component={EditProfile} />
             <Route path='/listing/:id' component={Listing} />
-            <Route path='/mywehire/bookings' component={Bookings} />
             <div>
               {this.props.firstLogin && this.props.isAuthenticated && <NewProfile isComplete={this.isComplete} />}
             </div>

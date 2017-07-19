@@ -9,6 +9,7 @@ import getProfile from './user'
 import error from './error'
 import listing from './listing'
 import booking from './booking'
+import usersbookings from './usersbookings'
 
 export default combineReducers({
   auth,
@@ -19,5 +20,6 @@ export default combineReducers({
   getProfile,
   error,
   listing,
-  booking
+  booking,
+  usersbookings
 })

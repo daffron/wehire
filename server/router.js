@@ -57,8 +57,8 @@ router.get('/bookings/:userid', (req, res) => {
   })
 })
 
-router.get('/bookings/:listingid', (req, res) => {
-  db.getRentingToBookings(req.params.listingid, (err, result) => {
+router.get('/bookings/:sellerid', (req, res) => {
+  db.getRentingToBookings(req.params.sellerid, (err, result) => {
     if (err) res.json({error: err})
     res.json(result)
   })
