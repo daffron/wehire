@@ -57,6 +57,13 @@ router.get('/bookings/:userid', (req, res) => {
   })
 })
 
+router.get('/bookings/:listingid', (req, res) => {
+  db.getRentingToBookings(req.params.listingid, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
 router.get('/listingssearch/:category/:term', (req, res) => {
   db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
     if (err) return res.json({error: err})
@@ -133,6 +140,13 @@ router.get('/checkcompleteuser/:id', (req, res) => {
       return res.json({isComplete: true})
     }
     return res.json({isComplete: false})
+  })
+})
+
+router.get('/userslistings/:id', (req, res) => {
+  db.getUsersListings(req.params.id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
   })
 })
 

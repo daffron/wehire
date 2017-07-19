@@ -158,10 +158,30 @@ function getListingById (id, cb) {
   })
 }
 
+function getUsersListings (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').find({user_id: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function getBookings (id, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
     db.collection('bookings').find({booked_user: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
+function getRentingToBookings (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').find({listing_id: id}).toArray((err, result) => {
       if (err) return cb(err)
       cb(null, result)
     })
@@ -202,5 +222,7 @@ module.exports = {
   getListingById,
   newBooking,
   saveUnavailableDates,
-  getBookings
+  getBookings,
+  getRentingToBookings,
+  getUsersListings
 }

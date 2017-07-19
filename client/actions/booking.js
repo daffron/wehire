@@ -28,6 +28,17 @@ export function getBookings (userId) {
   }
 }
 
+export function geRentingToBookings (listingId) {
+  return dispatch => {
+    dispatch(waiting())
+    request('get', `/bookings/${listingId}`)
+    .then(result => {
+      dispatch(notWaiting())
+      dispatch(receiveBookings(result.body))
+    })
+  }
+}
+
 export function addBooking (listingId, booking) {
   return dispatch => {
     dispatch(waiting())
