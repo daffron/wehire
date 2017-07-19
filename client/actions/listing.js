@@ -1,4 +1,4 @@
-import {RECEIVE_CATEGORIES, NEW_LISTING, LISTING} from './variables'
+import {RECEIVE_CATEGORIES, NEW_LISTING, LISTING, RECEIVE_USERS_LISTINGS} from './variables'
 import request from '../utils/tokenApi'
 import {waiting, notWaiting} from './index'
 
@@ -46,6 +46,24 @@ export function getListing (id) {
       dispatch(listing(result.body[0]))
       dispatch(notWaiting())
     })
+  }
+}
+
+export function getUsersListings (id) {
+  return dispatch => {
+    dispatch(waiting())
+    request('get', `/userslistings/${id}`)
+    .then(result => {
+      dispatch(receiveUsersListings(result.body))
+      dispatch(notWaiting())
+    })
+  }
+}
+
+const receiveUsersListings = listings => {
+  return {
+    type: RECEIVE_USERS_LISTINGS,
+    listings
   }
 }
 

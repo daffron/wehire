@@ -158,10 +158,54 @@ function getListingById (id, cb) {
   })
 }
 
-function saveBookedDates (listingId, userId, unavailableDates, bookedDates, cb) {
+function getUsersListings (id, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('listings').update({_id: ObjectId(listingId)}, {$set: {unavailable_dates: unavailableDates, booking: {booked_user: userId, booked_dates: bookedDates}}}, (err, result) => {
+    db.collection('listings').find({user_id: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
+function getBookings (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').find({booked_user: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
+function getRentingToBookings (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').find({seller_id: id}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
+function newBooking (booking, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').find({_id: ObjectId(booking.listing_id)}).toArray((err, result) => {
+      booking.seller_id = result[0].user_id
+      if (err) return cb(err)
+      db.collection('bookings').save(booking, (err, result) => {
+        if (err) return cb(err)
+        cb(null, result)
+      })
+    })
+  })
+}
+
+function saveUnavailableDates (listingId, unavailableDates, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('listings').update({_id: ObjectId(listingId)}, {$set: {unavailable_dates: unavailableDates}}, (err, result) => {
       if (err) return cb(err)
       cb(null, result)
     })
@@ -180,5 +224,9 @@ module.exports = {
   newListing,
   updateProfile,
   getListingById,
-  saveBookedDates
+  newBooking,
+  saveUnavailableDates,
+  getBookings,
+  getRentingToBookings,
+  getUsersListings
 }

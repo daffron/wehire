@@ -50,6 +50,19 @@ router.get('/locations', (req, res) => {
   })
 })
 
+router.get('/bookings/:userid', (req, res) => {
+  db.getBookings(req.params.userid, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
+router.get('/bookings/:sellerid', (req, res) => {
+  db.getRentingToBookings(req.params.sellerid, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
 
 router.get('/listingssearch/:category/:term', (req, res) => {
   db.getListingsBySearch(req.params.category, req.params.term, (err, result) => {
@@ -98,9 +111,12 @@ router.put('/myprofile/edit', (req, res) => {
   })
 })
 
-router.put('/listing/:id/booking', (req, res) => {
-  db.saveBookedDates(req.params.id, req.body.booking.bookedUser, req.body.unavailableDates, req.body.bookedDates, (err, result) => {
+router.post('/listing/:id/booking', (req, res) => {
+  db.newBooking(req.body.booking, (err, result) => {
     if (err) return res.json({error: err})
+    db.saveUnavailableDates(req.params.id, req.body.unavailableDates, (err, result) => {
+      if (err) return res.json({error: err})
+    })
     res.json(result)
   })
 })
@@ -124,6 +140,13 @@ router.get('/checkcompleteuser/:id', (req, res) => {
       return res.json({isComplete: true})
     }
     return res.json({isComplete: false})
+  })
+})
+
+router.get('/userslistings/:id', (req, res) => {
+  db.getUsersListings(req.params.id, (err, result) => {
+    if (err) return res.json({error: err})
+    res.json(result)
   })
 })
 
