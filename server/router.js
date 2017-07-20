@@ -50,7 +50,7 @@ router.get('/locations', (req, res) => {
   })
 })
 
-router.get('/bookings/:bookingid', (req, res) => {
+router.get('/getbooking/:bookingid', (req, res) => {
   db.getListingById(req.params.bookingid, (err, result) => {
     if (err) res.json({error: err})
     res.json(result)

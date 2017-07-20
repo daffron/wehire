@@ -159,6 +159,7 @@ function getListingById (id, cb) {
 }
 
 function getBookingById (id, cb) {
+  console.log(id)
   getDatabase((err, db) => {
     if (err) return cb(err)
     db.collection('bookings').find({_id: ObjectId(id)}).toArray((err, result) => {
