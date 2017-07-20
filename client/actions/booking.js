@@ -26,7 +26,7 @@ const receiveRentingToBookings = bookings => {
 export function getBooking (bookingId) {
   return dispatch => {
     dispatch(waiting())
-    request('get', `/bookings/${bookingId}`)
+    request('get', `/getbooking/${bookingId}`)
     .then(result => {
       dispatch(notWaiting())
       dispatch(singleBooking(result.body))

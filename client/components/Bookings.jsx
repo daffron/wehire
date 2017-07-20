@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
+import {Link} from 'react-router-dom'
+
 
 class Bookings extends React.Component {
   constructor (props) {
@@ -30,6 +32,7 @@ class Bookings extends React.Component {
                 <td>{booking.listing_name}</td>
                 <td>{booking.booked_dates[0]} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
+                <Link to={`/mywehire/bookings/${booking._id}`}><td>View</td></Link>
               </tr>
           </tbody>
         )

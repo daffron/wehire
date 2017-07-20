@@ -3,6 +3,7 @@ import {Link, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUsersListings} from '../actions/listing'
 import Bookings from './Bookings'
+import Booking from './Booking'
 import {getRentingFromBookings, getRentingToBookings} from '../actions/booking'
 
 class UserDashboard extends React.Component {
@@ -27,6 +28,7 @@ class UserDashboard extends React.Component {
         <Link to='/createlisting'> Create a listing </Link>
         <Link to='/mywehire/bookings/'>View your Bookings </Link>
         <Route path='/mywehire/bookings' component={Bookings} />
+        <Route path='/mywehire/bookings/:id' component={Booking} />        
         <button onClick={this.goToProfile.bind(this)}>Profile</button>
       </div>
     )

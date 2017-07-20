@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 
 import auth from './auth'
+import booking from './booking'
 import waiting from './waiting'
 import categories from './categories'
 import locations from './locations'
@@ -21,5 +22,6 @@ export default combineReducers({
   error,
   listing,
   rentingFromBookings,
-  rentingToBookings
+  rentingToBookings,
+  booking
 })
