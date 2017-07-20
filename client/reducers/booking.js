@@ -1,8 +1,8 @@
-import {NEW_BOOKING} from '../actions/variables'
+import {RECEIVE_BOOKING} from '../actions/variables'
 
 const booking = (state = [], action) => {
   switch (action.type) {
-    case NEW_BOOKING: {
+    case RECEIVE_BOOKING: {
       return action.booking
     }
   }
