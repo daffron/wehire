@@ -201,12 +201,16 @@ function getRentingToBookings (id, cb) {
 function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('listings').find({_id: ObjectId(booking.listing_id)}).toArray((err, result) => {
-      booking.seller_id = result[0].user_id
+    db.collection('users').find({auth_id: booking.booked_user}).toArray((err, result) => {
+      booking.user_name = result[0].user_name
       if (err) return cb(err)
-      db.collection('bookings').save(booking, (err, result) => {
+      db.collection('listings').find({_id: ObjectId(booking.listing_id)}).toArray((err, result) => {
+        booking.seller_id = result[0].user_id
         if (err) return cb(err)
-        cb(null, result)
+        db.collection('bookings').save(booking, (err, result) => {
+          if (err) return cb(err)
+          cb(null, result)
+        })
       })
     })
   })

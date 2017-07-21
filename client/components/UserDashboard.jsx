@@ -28,7 +28,7 @@ class UserDashboard extends React.Component {
         <Link to='/createlisting'> Create a listing </Link>
         <Link to='/mywehire/bookings/'>View your Bookings </Link>
         <Route path='/mywehire/bookings' component={Bookings} />
-        <Route path='/mywehire/bookings/:id' component={Booking} />        
+        <Route path='/mywehire/bookings/:id' component={Booking} />
         <button onClick={this.goToProfile.bind(this)}>Profile</button>
       </div>
     )

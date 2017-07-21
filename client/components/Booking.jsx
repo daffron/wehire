@@ -15,12 +15,9 @@ class Booking extends React.Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
-  componentDidMount () {
-    this.props.getBooking(this.props.match.params.id)
-  }
-
   handleOpen (e) {
     e.preventDefault()
+    this.props.getBooking(this.props.bookingId)
     this.setState({modal: true})
   }
 
@@ -31,11 +28,11 @@ class Booking extends React.Component {
   render () {
     return (
     <div>
-       <button className='date-modal' onClick = {this.handleOpen}>View</button> 
+      <button className='date-modal' onClick = {this.handleOpen}>View</button>
       {this.state.modal &&
           <ModalContainer onClose={this.handleClose}>
             <ModalDialog onClose={this.handleClose}>
-              <h1>Booking</h1>
+              <h3>Booking</h3>
             </ModalDialog>
           </ModalContainer>
       }

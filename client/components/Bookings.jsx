@@ -1,14 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
-import {Link} from 'react-router-dom'
+
 import Booking from './Booking'
 
 class Bookings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      bookings: props.bookings
+      bookings: props.bookings,
+      modal: false
     }
   }
 
@@ -19,7 +20,7 @@ class Bookings extends React.Component {
         <h3>Renting from</h3>
         <table className='booking-table'>
           <tr>
-            <th>Listing ID</th>
+            <th>User</th>
             <th>Listing Title</th>
             <th>Date From</th>
             <th>Date to</th>
@@ -28,11 +29,11 @@ class Bookings extends React.Component {
         return (
           <tbody>
               <tr>
-                <td>{booking.listing_id}</td>
+                <td>{booking.user_name}</td>
                 <td>{booking.listing_name}</td>
                 <td>{booking.booked_dates[0]} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                <Link to={`/mywehire/bookings/${booking._id}`}><Booking /></Link>
+                <Booking bookingId={booking._id}/>
               </tr>
           </tbody>
         )
@@ -41,7 +42,7 @@ class Bookings extends React.Component {
         <h3>Renting To</h3>
         <table className='booking-table'>
           <tr>
-            <th>Listing ID</th>
+            <th>User</th>
             <th>Listing Title</th>
             <th>Date From</th>
             <th>Date To</th>
@@ -50,10 +51,11 @@ class Bookings extends React.Component {
         return (
           <tbody>
               <tr>
-                <td>{booking.listing_id}</td>
+                <td>{booking.user_name}</td>
                 <td>{booking.listing_name}</td>
                 <td>{booking.booked_dates[0]} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
+                <Booking bookingId={booking._id}/>
               </tr>
           </tbody>
         )
