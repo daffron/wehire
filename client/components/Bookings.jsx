@@ -63,7 +63,7 @@ class Bookings extends React.Component {
                 <td>{booking.listing_name}</td>
                 <td>{moment(booking.booked_dates[0]).format('DD/MM/YYYY')} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                <Booking bookingId={booking._id} />
+                <Booking test={this.rentingTo} bookingId={booking._id} />
               </tr>
           </tbody>
         )

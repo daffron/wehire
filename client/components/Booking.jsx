@@ -30,7 +30,7 @@ class Booking extends React.Component {
     <div>
       <button className='date-modal' onClick = {this.handleOpen}>View</button>
       {this.state.modal &&
-         <Modal />
+         <Modal content={this.props.rentingto}/>
       }
     </div>
     )
