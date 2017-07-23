@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {ModalContainer, ModalDialog} from 'react-modal-dialog'
 
+import Modal from './Modal'
 import {getBooking} from '../actions/booking'
 
 class Booking extends React.Component {
@@ -30,14 +30,16 @@ class Booking extends React.Component {
     <div>
       <button className='date-modal' onClick = {this.handleOpen}>View</button>
       {this.state.modal &&
-          <ModalContainer onClose={this.handleClose}>
-            <ModalDialog onClose={this.handleClose}>
-              <h3>Booking</h3>
-            </ModalDialog>
-          </ModalContainer>
+         <Modal />
       }
     </div>
     )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    booking: state.booking
   }
 }
 
@@ -47,5 +49,5 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Booking)
+export default connect(mapStateToProps, mapDispatchToProps)(Booking)
 

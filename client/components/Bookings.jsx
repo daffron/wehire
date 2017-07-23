@@ -13,6 +13,14 @@ class Bookings extends React.Component {
     }
   }
 
+  rentingTo () {
+    return (
+      <div className='return-to'>
+      <button> test </button>
+      </div>
+    )
+  }
+
   render () {
     return (
       <div className='users-bookings'>
@@ -25,15 +33,15 @@ class Bookings extends React.Component {
             <th>Date From</th>
             <th>Date to</th>
           </tr>
-      {this.props.rentingfrom.map(booking => {
+      {this.props.rentingfrom.map((booking, i) => {
         return (
-          <tbody>
+          <tbody key={i}>
               <tr>
                 <td>{booking.user_name}</td>
                 <td>{booking.listing_name}</td>
-                <td>{booking.booked_dates[0]} </td>
+                <td>{moment(booking.booked_dates[0]).format('DD/MM/YYYY')} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                <Booking bookingId={booking._id}/>
+                <Booking bookingId={booking._id} returnDate={moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}/>
               </tr>
           </tbody>
         )
@@ -47,15 +55,15 @@ class Bookings extends React.Component {
             <th>Date From</th>
             <th>Date To</th>
           </tr>
-      {this.props.rentingto.map(booking => {
+      {this.props.rentingto.map((booking, j) => {
         return (
-          <tbody>
+          <tbody key={j}>
               <tr>
                 <td>{booking.user_name}</td>
                 <td>{booking.listing_name}</td>
-                <td>{booking.booked_dates[0]} </td>
+                <td>{moment(booking.booked_dates[0]).format('DD/MM/YYYY')} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                <Booking bookingId={booking._id}/>
+                <Booking bookingId={booking._id} />
               </tr>
           </tbody>
         )
