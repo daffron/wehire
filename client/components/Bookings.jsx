@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
-
+import Modal from './Modal'
 import Booking from './Booking'
 
 class Bookings extends React.Component {
@@ -11,12 +11,13 @@ class Bookings extends React.Component {
       bookings: props.bookings,
       modal: false
     }
+        this.rentingTo = this.rentingTo.bind(this)
   }
 
   rentingTo () {
     return (
       <div className='return-to'>
-      <button> test </button>
+        <h1> hello</h1>
       </div>
     )
   }
@@ -41,7 +42,7 @@ class Bookings extends React.Component {
                 <td>{booking.listing_name}</td>
                 <td>{moment(booking.booked_dates[0]).format('DD/MM/YYYY')} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                <Booking bookingId={booking._id} returnDate={moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}/>
+                  <button>View{<Modal content={this.rentingTo} />}</button>
               </tr>
           </tbody>
         )
