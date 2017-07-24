@@ -11,13 +11,29 @@ class Bookings extends React.Component {
       bookings: props.bookings,
       modal: false
     }
-        this.rentingTo = this.rentingTo.bind(this)
+    this.rentingTo = this.rentingTo.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
-  rentingTo () {
+  handleOpen (booking) {
+    this.setState({
+      modal: true,
+      current: booking
+    })
+  }
+
+  handleClose () {
+    this.setState({modal: false})
+  }
+
+  rentingTo (booking) {
     return (
       <div className='return-to'>
-        <h1> hello</h1>
+        <h4>Item to be returned by {moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</h4>
+        <button>Returned on time</button>
+        <button>Returned late</button>
+        <button>Dispute</button>
       </div>
     )
   }
@@ -27,6 +43,7 @@ class Bookings extends React.Component {
       <div className='users-bookings'>
         <h3 className="text-center">My Bookings</h3>
         <h3>Renting from</h3>
+        {this.state.modal && <Modal content={this.rentingTo(this.state.current)} onClose={this.handleClose}/>}
         <table className='booking-table'>
           <tr>
             <th>User</th>
@@ -42,7 +59,7 @@ class Bookings extends React.Component {
                 <td>{booking.listing_name}</td>
                 <td>{moment(booking.booked_dates[0]).format('DD/MM/YYYY')} </td>
                 <td>{moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</td>
-                  <button>View{<Modal content={this.rentingTo} />}</button>
+                  <button onClick={() => { this.handleOpen(booking) }}>View</button>
               </tr>
           </tbody>
         )

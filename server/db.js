@@ -198,6 +198,16 @@ function getRentingToBookings (id, cb) {
   })
 }
 
+function removeBooking (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').remove({_id: ObjectId(id)}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
