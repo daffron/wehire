@@ -70,7 +70,7 @@ export function addBooking (listingId, booking) {
 export function removeCompletedBooking (bookingId, booking) {
   return dispatch => {
     dispatch(waiting())
-    request('delete', `//bookings/${bookingId}`, booking)
+    request('delete', `/bookings/${bookingId}`, booking)
     .then(result => {
       if (result.error) return dispatch(error(result.error))
       dispatch(notWaiting())
