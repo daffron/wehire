@@ -30,14 +30,10 @@ class Bookings extends React.Component {
   }
 
   rentingTo (booking) {
-    console.log(booking._id)
     return (
       <div className='return-to'>
         <h4>Item to be returned by {moment(booking.booked_dates[booking.booked_dates.length - 1]).format('DD/MM/YYYY')}</h4>
-        <button onClick={() => { this.props.completeBooking(booking._id,
-          {booking: booking,
-            returned: true
-          })}}>Returned on time</button>
+        <button onClick={() => { this.props.completeBooking(booking._id, booking) }}>Returned on time</button>
         <button>Returned late</button>
         <button>Dispute</button>
       </div>

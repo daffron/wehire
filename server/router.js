@@ -65,7 +65,7 @@ router.get('/bookings/:userid', (req, res) => {
 })
 
 router.delete('/bookings/:bookingid', (req, res) => {
-  db.removeBooking(req.params.bookingid, req.body.booking, (err, result) => {
+  db.removeBooking(req.params.bookingid, req.body, (err, result) => {
     if (err) res.json({error: err})
     res.json(result)
   })
