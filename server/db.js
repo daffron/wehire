@@ -198,12 +198,15 @@ function getRentingToBookings (id, cb) {
   })
 }
 
-function removeBooking (id, cb) {
+function removeBooking (id, booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('bookings').remove({_id: ObjectId(id)}).toArray((err, result) => {
+    db.collection('history').save(booking, (err, result) => {
       if (err) return cb(err)
-      cb(null, result)
+      db.collection('bookings').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return cb(err)
+        cb(null, result)
+      })
     })
   })
 }
@@ -253,5 +256,6 @@ module.exports = {
   getRentingFromBookings,
   getRentingToBookings,
   getUsersListings,
-  getBookingById
+  getBookingById,
+  removeBooking
 }

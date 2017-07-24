@@ -64,6 +64,13 @@ router.get('/bookings/:userid', (req, res) => {
   })
 })
 
+router.delete('/bookings/:bookingid', (req, res) => {
+  db.removeBooking(req.params.bookingid, req.body.booking, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
 router.get('/bookings/:sellerid', (req, res) => {
   db.getRentingToBookings(req.params.sellerid, (err, result) => {
     if (err) res.json({error: err})
