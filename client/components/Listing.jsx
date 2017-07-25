@@ -7,6 +7,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import {getDuration, getDateArray} from '../utils/functions'
 import {getListing} from '../actions/listing'
 import {addBooking} from '../actions/booking'
+import {getProfileById} from '../actions/user'
 import {saveToken} from '../utils/api'
 
 class Listing extends React.Component {

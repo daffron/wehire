@@ -158,6 +158,16 @@ function getListingById (id, cb) {
   })
 }
 
+function getBookingById (id, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('bookings').find({_id: ObjectId(id)}).toArray((err, result) => {
+      if (err) return cb(err)
+      cb(null, result)
+    })
+  })
+}
+
 function getUsersListings (id, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
@@ -168,7 +178,7 @@ function getUsersListings (id, cb) {
   })
 }
 
-function getBookings (id, cb) {
+function getRentingFromBookings (id, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
     db.collection('bookings').find({booked_user: id}).toArray((err, result) => {
@@ -188,15 +198,32 @@ function getRentingToBookings (id, cb) {
   })
 }
 
+function removeBooking (id, booking, cb) {
+  getDatabase((err, db) => {
+    if (err) return cb(err)
+    db.collection('history').save(booking, (err, result) => {
+      if (err) return cb(err)
+      db.collection('bookings').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return cb(err)
+        cb(null, result)
+      })
+    })
+  })
+}
+
 function newBooking (booking, cb) {
   getDatabase((err, db) => {
     if (err) return cb(err)
-    db.collection('listings').find({_id: ObjectId(booking.listing_id)}).toArray((err, result) => {
-      booking.seller_id = result[0].user_id
+    db.collection('users').find({auth_id: booking.booked_user}).toArray((err, result) => {
+      booking.user_name = result[0].user_name
       if (err) return cb(err)
-      db.collection('bookings').save(booking, (err, result) => {
+      db.collection('listings').find({_id: ObjectId(booking.listing_id)}).toArray((err, result) => {
+        booking.seller_id = result[0].user_id
         if (err) return cb(err)
-        cb(null, result)
+        db.collection('bookings').save(booking, (err, result) => {
+          if (err) return cb(err)
+          cb(null, result)
+        })
       })
     })
   })
@@ -226,7 +253,9 @@ module.exports = {
   getListingById,
   newBooking,
   saveUnavailableDates,
-  getBookings,
+  getRentingFromBookings,
   getRentingToBookings,
-  getUsersListings
+  getUsersListings,
+  getBookingById,
+  removeBooking
 }

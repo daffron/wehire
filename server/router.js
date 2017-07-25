@@ -50,8 +50,22 @@ router.get('/locations', (req, res) => {
   })
 })
 
+router.get('/getbooking/:bookingid', (req, res) => {
+  db.getBookingById(req.params.bookingid, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
 router.get('/bookings/:userid', (req, res) => {
-  db.getBookings(req.params.userid, (err, result) => {
+  db.getRentingFromBookings(req.params.userid, (err, result) => {
+    if (err) res.json({error: err})
+    res.json(result)
+  })
+})
+
+router.delete('/bookings/:bookingid', (req, res) => {
+  db.removeBooking(req.params.bookingid, req.body, (err, result) => {
     if (err) res.json({error: err})
     res.json(result)
   })
