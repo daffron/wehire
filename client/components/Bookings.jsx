@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import Modal from './Modal'
-import Booking from './Booking'
 
 import {removeCompletedBooking} from '../actions/booking'
 
